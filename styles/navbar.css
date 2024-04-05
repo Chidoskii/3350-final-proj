@@ -1,3 +1,74 @@
 .topnav {
   background-color: #222 !important;
 }
+
+.navbar-brand {
+  padding: 0;
+  font-size: 20pt;
+  font-weight: 600;
+}
+
+.nav-item {
+  margin: 0 15px;
+}
+
+.mb-nav-logo {
+  height: 50px;
+  border: goldenrod 5px solid;
+  border-radius: 50%;
+}
+
+.navbar-nav {
+  font-size: 14pt;
+  margin-right: 15px;
+}
+
+.topnav-search-box-can {
+  width: 45%;
+  height: 43px;
+  border-radius: 5px;
+  border: 1px whitesmoke solid;
+  background-color: gainsboro;
+}
+
+.topnav-search-box {
+  color: black !important;
+  border: none;
+  border-radius: 0;
+  background-color: gainsboro !important;
+  margin-right: 0px !important;
+}
+
+.topnav-search-btn {
+  padding: 5px;
+  border-radius: 0;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  border: none;
+  background-color: gainsboro;
+}
+
+.topnav-search-btn:hover {
+  background-color: rgb(185, 185, 185);
+}
+
+.search-icon {
+  height: 30px;
+}
+
+.register-btn {
+  margin-left: 10px;
+  height: 43px;
+  color: #222;
+  font-weight: 500;
+  background-color: goldenrod;
+}
+
+.register-btn:hover {
+  margin-left: 10px;
+  height: 43px;
+  color: goldenrod;
+  font-weight: 500;
+  border: gainsboro 1px solid;
+  background-color: #222;
+}
