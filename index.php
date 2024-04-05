@@ -48,7 +48,7 @@ require_once("./php/config.php");
         <input class="form-control me-2 topnav-search-box" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-secondary topnav-search-btn" type="submit"><img alt=".." src="./imgs/search_icon.png" class="search-icon"/></button>
       </form>
-      <button class="btn register-btn">LOGIN</button>
+      <a href="#"><button class="btn register-btn">LOGIN</button></a>
     </div>
   </div>
 </nav>
