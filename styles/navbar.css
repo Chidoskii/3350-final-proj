@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Orbitron:wght@400..900&display=swap');
+
 a:active {
   color: goldenrod;
 }
@@ -8,8 +10,11 @@ a:active {
 
 .navbar-brand {
   padding: 0;
-  font-size: 20pt;
+  font-size: 25pt;
+  font-family: 'Orbitron', sans-serif;
+  font-optical-sizing: auto;
   font-weight: 600;
+  font-style: normal;
 }
 
 .nav-item {

@@ -1,7 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap');
+
 body {
   background-color: rgb(240, 240, 240);
 }
 
 .page-contents {
   padding-top: 75px;
+  min-height: 100vh;
+}
+
+.home-page-show-title-can {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.cheeky-hook {
+  font-size: 15pt;
+  font-weight: 600;
+}
+
+.home-page-show-header {
+  background-image: url('https://www.cinechat.co.uk/wp-content/uploads/2023/02/Ant-Man-and-the-Wasp-Quantumania-Review-1024x576.webp');
+  background-repeat: repeat;
+  background-position: -105% 10%;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0;
+  font-size: 90pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: 'Steelfish Rg', 'helvetica neue', helvetica, arial, sans-serif;
+  font-weight: 800;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Footer styling */
+footer {
+  background-color: rgb(240, 240, 240);
+  border-top: goldenrod 15px solid;
+}
+
+.footy-can {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 25vh;
+}
+
+.footer-links-can {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-top: 10px;
+}
+
+.footy-header {
+  text-align: center;
+  padding-top: 25px;
+  font-size: 25pt;
+  font-family: 'Orbitron', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.footy-sub-header {
+  margin: 0 auto;
+  padding: 10px;
+  font-size: 14pt;
+  font-weight: 500;
+}
+
+.footy-links-l,
+.footy-links-m,
+.footy-links-r {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.footy-link-list {
+  text-align: center;
+}
+
+.footy-links-l > a,
+.footy-links-m > a,
+.footy-links-r > a {
+  color: #111;
+  font-size: 11pt;
+  text-decoration: none;
+}
+
+.footer-copyright {
+  display: flex;
+  font-size: 9pt;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Montserrat Alternates', sans-serif;
+  padding-bottom: 5px;
+}
+
+.socials-box {
+  display: flex;
+  justify-content: space-around;
+}
+
+.footy-social-icon {
+  height: 36px;
+}
+
+.moviebuffs-copyright {
+  font-size: 10pt;
+  font-style: italic;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 600;
+  text-align: center;
+  align-items: center;
 }
