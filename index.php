@@ -21,7 +21,7 @@ require_once("./php/config.php");
 <body>
 <nav class="topnav navbar bg-dark fixed-top navbar-expand-lg bg-body-tertiary border-bottom border-body" data-bs-theme="dark">
   <div class="container-md">
-    <a class="navbar-brand" href="#"><img alt="The Movie Buffs" src="./imgs/moviebuffs.png" class="mb-nav-logo"/>&nbsp;TheMovieBuffs</a>
+    <a class="navbar-brand" href="#"><img alt="The Movie Buffs" src="./imgs/tmb.png" class="mb-nav-logo"/>&nbsp;TheMovieBuffs</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

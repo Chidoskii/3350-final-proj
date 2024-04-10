@@ -23,6 +23,7 @@ a:active {
 
 .mb-nav-logo {
   height: 50px;
+  rotate: -45deg;
   border: goldenrod 5px solid;
   border-radius: 50%;
 }
