@@ -1,12 +1,69 @@
 @import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap');
 
+html,
 body {
   background-color: rgb(240, 240, 240);
+}
+
+.mh-login-register {
+  margin: 5px 25px 0;
+  flex-direction: column;
+  padding-bottom: 2px;
+}
+
+.modal-title {
+  font-size: 25pt;
+  font-family: 'Orbitron', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+  margin-bottom: 10px;
+}
+
+.nl-nonactive {
+  color: #333;
+}
+
+.modal-body {
+  text-align: center;
+}
+
+.creds-modal-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.creds-btns-can {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.creds-msg {
+  margin: 10px 0 25px;
+}
+
+.creds-form-btns {
+  margin: 15px 0;
+  height: 45px;
+  font-size: 14pt;
+  font-weight: 600;
+  border: #222 1px solid;
+}
+
+.creds-form-confirm {
+  background-color: goldenrod;
+}
+
+.creds-form-btns:hover {
+  background-color: #222;
+  border: goldenrod 1px solid;
 }
 
 .page-contents {
   padding-top: 75px;
   min-height: 100vh;
+  width: 100%;
 }
 
 .home-page-show-title-can {
@@ -18,6 +75,15 @@ body {
 .cheeky-hook {
   font-size: 15pt;
   font-weight: 600;
+}
+
+.creds-can {
+  min-height: 60vh;
+}
+
+.creds-form-can {
+  width: 80%;
+  margin: 0 auto;
 }
 
 .home-page-show-header {
@@ -36,10 +102,17 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.form-control::-webkit-input-placeholder {
+  color: #222;
+  opacity: 0.5; /* Firefox */
+}
+
 /* Footer styling */
 footer {
   background-color: rgb(240, 240, 240);
   border-top: goldenrod 15px solid;
+  display: flex;
+  width: 100%;
 }
 
 .footy-can {
@@ -119,4 +192,14 @@ footer {
   font-weight: 600;
   text-align: center;
   align-items: center;
+}
+
+@media screen and (max-width: 750px) {
+  .home-page-show-header {
+    font-size: 65pt;
+  }
+
+  .cheeky-hook {
+    font-size: 11pt;
+  }
 }

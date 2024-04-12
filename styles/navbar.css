@@ -6,9 +6,15 @@ a:active {
 
 .topnav {
   background-color: #222 !important;
+  width: 100%;
+}
+
+.topnav-padding {
+  padding: 0 100px;
 }
 
 .navbar-brand {
+  display: flex;
   padding: 0;
   font-size: 25pt;
   font-family: 'Orbitron', sans-serif;
@@ -81,4 +87,18 @@ a:active {
   font-weight: 500;
   border: gainsboro 1px solid;
   background-color: #222;
+}
+
+.creds-form-can {
+  text-align: left;
+}
+
+@media screen and (max-width: 750px) {
+  .nav-bar-title {
+    display: none;
+  }
+
+  .topnav-padding {
+    padding: 0 50px;
+  }
 }
