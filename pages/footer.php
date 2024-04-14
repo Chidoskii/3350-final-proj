@@ -1,7 +1,7 @@
 <footer>
 
   <div class="container-fluid footy-can">
-    <div class="footy-header"><img alt="The Movie Buffs" src="./imgs/tmb.png" class="mb-nav-logo"/>&nbsp;TheMovieBuffs</div>
+    <div class="footy-header"><img alt="The Movie Buffs" src="../imgs/tmb.png" class="mb-nav-logo"/>&nbsp;TheMovieBuffs</div>
     <div class="footer-links-can">
       <div class="footy-links-l">
         <p class="footy-sub-header">Overview</p>
