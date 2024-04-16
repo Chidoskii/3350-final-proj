@@ -16,6 +16,7 @@ require_once("./php/config.php");
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="./styles/navbar.css">
     <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/reel.css">
     <link rel="shortcut icon" href="../imgs/favicon.ico" />
 </head>
 <body>
@@ -143,7 +144,179 @@ require_once("./php/config.php");
   <br>
   <br>
   <a href="./pages/preferrences.php"><button class="my-pf-page">My Profile</button></a>
+
+  <div class="reel-container">
+    <h2 class="movie-reel-title">New Releases</h2>
+    <br>
+      <div class="slider-wrapper">
+        <button id="prev-slide" class="slide-button material-symbols-rounded">
+        <img src="./imgs/reel/chev-left.png" alt="..." class="chevy" />
+        </button>
+        <ul class="image-list">
+          <div class=film-info-can>  
+          <img class="image-item" src="./imgs/reel/arc.jpg" alt="img-1" />
+          <div class="film-details">
+            <div class="film-desc-deets">
+            <p class="img-reel-film-title">Movie Title</p>
+            <p class="img-reel-film-genre">Movie Genre</p>
+            </div>
+            <div class="film-ratings-deets">
+            <p class="img-reel-ratings-title">BuffScore</p>
+            <div class="img-reel-rating-can">
+            <p class="img-reel-ratings">75</p>
+            </div>
+            </div>
+          </div>
+          </div>
+          <div class=film-info-can>
+          <img class="image-item" src="./imgs/reel/arthur.jpg" alt="img-2" />
+          <div class="film-details">
+            <div class="film-desc-deets">
+            <p class="img-reel-film-title">Movie Title</p>
+            <p class="img-reel-film-genre">Movie Genre</p>
+            </div>
+            <div class="film-ratings-deets">
+            <p class="img-reel-ratings-title">BuffScore</p>
+            <div class="img-reel-rating-can">
+            <p class="img-reel-ratings">75</p>
+            </div>
+            </div>
+          </div>
+          </div>
+          <div class=film-info-can>
+          <img class="image-item" src="./imgs/reel/boby.jpg" alt="img-3" />
+          <div class="film-details">
+            <div class="film-desc-deets">
+            <p class="img-reel-film-title">Movie Title</p>
+            <p class="img-reel-film-genre">Movie Genre</p>
+            </div>
+            <div class="film-ratings-deets">
+            <p class="img-reel-ratings-title">BuffScore</p>
+            <div class="img-reel-rating-can">
+            <p class="img-reel-ratings">75</p>
+            </div>
+            </div>
+          </div>
+          </div>
+          <div class=film-info-can>
+          <img class="image-item" src="./imgs/reel/dunee.jpg" alt="img-4" />
+          <div class="film-details">
+            <div class="film-desc-deets">
+            <p class="img-reel-film-title">Movie Title</p>
+            <p class="img-reel-film-genre">Movie Genre</p>
+            </div>
+            <div class="film-ratings-deets">
+            <p class="img-reel-ratings-title">BuffScore</p>
+            <div class="img-reel-rating-can">
+            <p class="img-reel-ratings">75</p>
+            </div>
+            </div>
+          </div>
+          </div>
+          <div class=film-info-can>
+          <img class="image-item" src="./imgs/reel/ghosts.jpg" alt="img-5" />
+          <div class="film-details">
+            <div class="film-desc-deets">
+            <p class="img-reel-film-title">Movie Title</p>
+            <p class="img-reel-film-genre">Movie Genre</p>
+            </div>
+            <div class="film-ratings-deets">
+            <p class="img-reel-ratings-title">BuffScore</p>
+            <div class="img-reel-rating-can">
+            <p class="img-reel-ratings">75</p>
+            </div>
+            </div>
+          </div>
+          </div>
+          <div class=film-info-can>
+          <img class="image-item" src="./imgs/reel/gochilla.jpg" alt="img-6" />
+          <div class="film-details">
+            <div class="film-desc-deets">
+            <p class="img-reel-film-title">Movie Title</p>
+            <p class="img-reel-film-genre">Movie Genre</p>
+            </div>
+            <div class="film-ratings-deets">
+            <p class="img-reel-ratings-title">BuffScore</p>
+            <div class="img-reel-rating-can">
+            <p class="img-reel-ratings">75</p>
+            </div>
+            </div>
+          </div>
+          </div>
+          <div class=film-info-can>
+          <img class="image-item" src="./imgs/reel/monkey.jpg" alt="img-7" />
+          <div class="film-details">
+            <div class="film-desc-deets">
+            <p class="img-reel-film-title">Movie Title</p>
+            <p class="img-reel-film-genre">Movie Genre</p>
+            </div>
+            <div class="film-ratings-deets">
+            <p class="img-reel-ratings-title">BuffScore</p>
+            <div class="img-reel-rating-can">
+            <p class="img-reel-ratings">75</p>
+            </div>
+            </div>
+          </div>
+          </div>
+          <div class=film-info-can>
+          <img class="image-item" src="./imgs/reel/omen.jpg" alt="img-8" />
+          <div class="film-details">
+            <div class="film-desc-deets">
+            <p class="img-reel-film-title">Movie Title</p>
+            <p class="img-reel-film-genre">Movie Genre</p>
+            </div>
+            <div class="film-ratings-deets">
+            <p class="img-reel-ratings-title">BuffScore</p>
+            <div class="img-reel-rating-can">
+            <p class="img-reel-ratings">75</p>
+            </div>
+            </div>
+          </div>
+          </div>
+          <div class=film-info-can>
+          <img class="image-item" src="./imgs/reel/panda.jpg" alt="img-9" />
+          <div class="film-details">
+            <div class="film-desc-deets">
+            <p class="img-reel-film-title">Movie Title</p>
+            <p class="img-reel-film-genre">Movie Genre</p>
+            </div>
+            <div class="film-ratings-deets">
+            <p class="img-reel-ratings-title">BuffScore</p>
+            <div class="img-reel-rating-can">
+            <p class="img-reel-ratings">75</p>
+            </div>
+            </div>
+          </div>
+          </div>
+          <div class=film-info-can>
+          <img class="image-item" src="./imgs/reel/stingy.jpg" alt="img-10" />
+          <div class="film-details">
+            <div class="film-desc-deets">
+            <p class="img-reel-film-title">Movie Title</p>
+            <p class="img-reel-film-genre">Movie Genre</p>
+            </div>
+            <div class="film-ratings-deets">
+            <p class="img-reel-ratings-title">BuffScore</p>
+            <div class="img-reel-rating-can">
+            <p class="img-reel-ratings">75</p>
+            </div>
+            </div>
+          </div>
+        </div>
+        </ul>
+        <button id="next-slide" class="slide-button material-symbols-rounded">
+          <img src="./imgs/reel/chev-right.png" alt="..." class="chevy" />
+        </button>
+      </div>
+      <div class="slider-scrollbar">
+        <div class="scrollbar-track">
+          <div class="scrollbar-thumb"></div>
+        </div>
+      </div>
+    </div>
 </div>
+
+
 
 
 <footer>
@@ -185,6 +358,7 @@ require_once("./php/config.php");
 
 </footer>
 
+<script src="./scripts/slide.js" ></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
