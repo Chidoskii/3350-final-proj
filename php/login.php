@@ -5,7 +5,6 @@ require_once("./php/functions.php");
 if (isset($_POST["Login"])) {
     $login_email = $_POST["email"];
     $login_password = $_POST["psswd"];
-    debug_to_console($login_password);
 
     if (strlen($login_email) == 0 || strlen($login_password) == 0) {
         $_SESSION["login_error"] = "email and Password cannot be empty.";
