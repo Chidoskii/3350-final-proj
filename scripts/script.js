@@ -35,28 +35,28 @@ function closeOffcanvas() {
 // Function to register User
 function registerUser() {
   //alert('wOrKs'); //Call test
-  var uname = document.getElementById("uname").value;
-  var email = document.getElementById("email").value;
-  var psswd = document.getElementById("psswd").value;
+  var uname = document.getElementById('uname').value;
+  var email = document.getElementById('email').value;
+  var psswd = document.getElementById('psswd').value;
   /*if (!uname || !email || !psswd) {
     alert(psswd);
     alert("Empty String");
   }
   else {*/
-   //Makes an object to send
-   let formData = new FormData();
+  //Makes an object to send
+  let formData = new FormData();
 
-   formData.append('register_user', uname);
-   formData.append('register_email', email);
-   formData.append('register_password', psswd);
+  formData.append('register_user', uname);
+  formData.append('register_email', email);
+  formData.append('register_password', psswd);
 
-   fetch('../pages/register.php', {
+  fetch('../pages/register.php', {
     method: 'POST',
-    body: formData
+    body: formData,
   })
-  .then(response => response.text()) // Sends object (Will request updating to JSON for security reasons)
-  .then(data => console.log(data))
-  .catch(error => console.error('Error: ', error));
+    .then((response) => response.text()) // Sends object (Will request updating to JSON for security reasons)
+    .then((data) => console.log(data))
+    .catch((error) => console.error('Error: ', error));
   //}
 }
 

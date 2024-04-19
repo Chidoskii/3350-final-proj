@@ -1,5 +1,7 @@
 <?php
 require_once("./php/config.php");
+require_once("./php/login.php");
+require_once("./php/register.php");
 
 ?>
 
@@ -18,6 +20,7 @@ require_once("./php/config.php");
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/reel.css">
     <link rel="shortcut icon" href="../imgs/favicon.ico" />
+    <script src="./scripts/validate.js"></script>
 </head>
 <body>
 <nav class="topnav navbar bg-dark fixed-top navbar-expand-lg bg-body-tertiary border-bottom border-body" data-bs-theme="dark">
@@ -73,17 +76,23 @@ require_once("./php/config.php");
       <div class="modal-body creds-modal-body">
         <div class="creds-msg">Welcome back!</div>
         <div class="creds-form-can">
-          <form>
+          <form method='post' id='login-modal' name='login-modal'>
             <label for="email" class="form-label creds-label">Email</label><br>
-            <input type="text" id="email" name="email" class="form-control creds-input-field"><br>
+            <input type="email" id="email" name="email" class="form-control creds-input-field"><br>
             <label for="psswd" class="form-label creds-label">Password</label><br>
-            <input type="text" id="psswd" name="psswd" class="form-control creds-input-field">
-          </form>
+            <input type="password" id="psswd" name="psswd" class="form-control creds-input-field">
           <br>
           <div class="creds-btns-can">
-          <button type="button" class="btn btn-primary creds-form-btns creds-form-confirm ">Sign In</button>
+          <button type="submit" name="Login" class="btn btn-primary creds-form-btns creds-form-confirm ">Sign In</button>
           <button type="button" class="btn btn-secondary creds-form-btns" data-bs-dismiss="modal">Close</button>
           </div>
+          <?php
+              if (isset($_SESSION["login_error"])) {
+                echo $_SESSION["login_error"] . "<br>";
+                unset($_SESSION["login_error"]);
+                }
+          ?>
+          </form>
         </div>
       </div>
     </div>
@@ -111,19 +120,19 @@ require_once("./php/config.php");
       Join TheMovieBuffs today to rate, review, and discover new movies and adventures!
       </div>
         <div class="creds-form-can">
-          <form>
-            <label for="uname" class="form-label creds-label">Username</label><br>
-            <input type="text" id="uname" name="uname" class="form-control creds-input-field"><br>
-            <label for="email" class="form-label creds-label">Email</label><br>
-            <input type="text" id="email" name="email" class="form-control creds-input-field"><br>
-            <label for="psswd" class="form-label creds-label">Password</label><br>
-            <input type="text" id="psswd" name="psswd" class="form-control creds-input-field">
+          <form method='post' action="" id="register-modal" name="register-modal">
+            <label for="register_user" class="form-label creds-label">Username</label><br>
+            <input type="text" id="register_user" name="register_user" class="form-control creds-input-field"><br>
+            <label for="register_email" class="form-label creds-label">Email</label><br>
+            <input type="email" id="register_email" name="register_email" class="form-control creds-input-field"><br>
+            <label for="register_password" class="form-label creds-label">Password</label><br>
+            <input type="password" id="register_password" name="register_password" class="form-control creds-input-field">
+            <br>
+            <div class="creds-btns-can">
+              <button type="submit" name="register" class="btn btn-primary creds-form-btns creds-form-confirm">Resgister</button>
+              <button type="button" class="btn btn-secondary creds-form-btns" data-bs-dismiss="modal">Close</button>
+            </div>
           </form>
-          <br>
-          <div class="creds-btns-can">
-          <button type="submit" name="register" class="btn btn-primary creds-form-btns creds-form-confirm">Resgister</button>
-          <button type="button" class="btn btn-secondary creds-form-btns" data-bs-dismiss="modal">Close</button>
-        </div>
         </div>
       </div>
     </div>
@@ -143,8 +152,9 @@ require_once("./php/config.php");
   <br>
   <br>
   <br>
+  <br>
   <a href="./pages/preferrences.php"><button class="my-pf-page">My Profile</button></a>
-
+  <a href="./php/logout.php"><button class="my-pf-page">LOGOUT</button></a>
   <div class="reel-container">
     <h2 class="movie-reel-title">New Releases</h2>
     <br>

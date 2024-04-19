@@ -1,6 +1,14 @@
 <?php
 require_once("../php/config.php");
 
+if(empty($_SESSION["logged_in"])){
+  header("location: ../index.php");
+}
+
+if($_SESSION["logged_in"] == false){
+  header("location: ../index.php");
+}
+
 ?>
 
 

@@ -42,6 +42,7 @@ a:active {
 .topnav-search-box-can {
   width: 45%;
   height: 43px;
+  margin: 0px;
   border-radius: 5px;
   border: 1px whitesmoke solid;
   background-color: gainsboro;

@@ -1,18 +1,8 @@
 <?php
-require_once("../php/config.php");
+require_once("config.php");
+require_once("functions.php");
 
-/*define('TITLE', "Login");
-define('LOG_FILE', './error.log');
-define('CSS', "../css/login.css");
-define('DEVELOPER', true);
-
-if(DEVELOPER) {
-  error_reporting(E_ALL);
-  ini_set("display_errors", 1);
-  ini_set("error_log", LOG_FILE);
-}*/
-//if(isset($_POST['Register'])) {
-if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Sends as a server request instead of isset
+if (isset($_POST["register"])) { 
     $register_user = $_POST['register_user'];
     $register_email = $_POST['register_email'];
     $register_password = $_POST['register_password'];
@@ -59,6 +49,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Sends as a server request instea
             http_response_code(405);
             echo "Failed to add";
         }
+        //Log User In
+        $user = get_user($register_email);
+        $_SESSION["logged_in"] = true;
+        $_SESSION["is_user"] = true;
+        $_SESSION["get_user"] = $user;
+        header("Location: ./pages/preferrences.php");
     }
 }
 
