@@ -75,6 +75,7 @@ body {
 .cheeky-hook {
   font-size: 15pt;
   font-weight: 600;
+  margin-top: -15px;
 }
 
 .creds-can {

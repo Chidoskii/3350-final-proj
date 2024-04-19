@@ -34,7 +34,6 @@ if (isset($_POST["Login"])) {
                     $_SESSION["is_user"] = false;
                 }
 
-                header("Location: ./pages/preferrences.php");
             }
             else {
                 $_SESSION["login_error"] = "Invalid username and password combination.";

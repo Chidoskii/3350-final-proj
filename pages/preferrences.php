@@ -56,7 +56,23 @@ if($_SESSION["logged_in"] == false){
         <input class="form-control me-2 topnav-search-box" type="search" placeholder="Search Movies" aria-label="Search">
         <button class="btn btn-outline-secondary topnav-search-btn" type="submit"><img alt=".." src="../imgs/search_icon.png" class="search-icon"/></button>
       </form>
-      <button type="button" class="btn register-btn" data-bs-toggle="modal" data-bs-target="#signinModal">LOGIN</button>
+      <?php
+        if(empty($_SESSION["logged_in"]) || $_SESSION["logged_in"] == false){
+          echo '<button type="button" class="btn register-btn" data-bs-toggle="modal" data-bs-target="#signinModal">LOGIN</button>';
+        } 
+        else {
+          echo '<li class="nav-item dropdown user-drop">
+                  <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img alt="user" src="../imgs/user-circle.png" class="user-logo"/>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">MyProfile Settings</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="../php/logout.php">LOGOUT </a></li>
+                  </ul>
+                </li>';
+        }
+        ?>
     </div>
   </div>
 </nav>

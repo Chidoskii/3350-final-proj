@@ -90,6 +90,14 @@ a:active {
   background-color: #222;
 }
 
+.user-logo {
+  height: 50px;
+}
+
+.user-drop {
+  display: flex;
+}
+
 .creds-form-can {
   text-align: left;
 }
