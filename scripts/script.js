@@ -1,25 +1,25 @@
 function displayAccount() {
-  console.log('Jamal Sucks');
+  console.log('Jamal Hill Sucks');
   document.getElementById('my-review-pref').classList.add('hidden');
   document.getElementById('my-account-pref').classList.remove('hidden');
   closeOffcanvas();
 }
 
 function displayRatingsReviews() {
-  console.log('Jamal Sucks');
+  console.log('Jamal Hill Sucks');
   document.getElementById('my-review-pref').classList.remove('hidden');
   document.getElementById('my-account-pref').classList.add('hidden');
   closeOffcanvas();
 }
 
 function displayPassForm() {
-  console.log('Jamal Sucks');
+  console.log('Jamal Hill Sucks');
   document.getElementById('password-form-change').classList.remove('hidden');
   document.getElementById('change-pass-btn').classList.add('hidden');
 }
 
 function hidePassForm() {
-  console.log('Jamal Sucks');
+  console.log('Jamal Hill Sucks');
   document.getElementById('password-form-change').classList.add('hidden');
   document.getElementById('change-pass-btn').classList.remove('hidden');
 }

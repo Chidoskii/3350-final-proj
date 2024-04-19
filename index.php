@@ -121,7 +121,7 @@ require_once("./php/config.php");
           </form>
           <br>
           <div class="creds-btns-can">
-          <button type="button" class="btn btn-primary creds-form-btns creds-form-confirm">Resgister</button>
+          <button type="submit" name="register" class="btn btn-primary creds-form-btns creds-form-confirm">Resgister</button>
           <button type="button" class="btn btn-secondary creds-form-btns" data-bs-dismiss="modal">Close</button>
         </div>
         </div>
@@ -318,7 +318,10 @@ require_once("./php/config.php");
 
 
 
-
+<br>
+<br>
+<br>
+<br>
 <footer>
 
   <div class="container-fluid footy-can">
