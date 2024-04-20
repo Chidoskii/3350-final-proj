@@ -173,7 +173,7 @@ require_once("./php/register.php");
         <img src="./imgs/reel/chev-left.png" alt="..." class="chevy" />
         </button>
         <ul class="image-list">
-          <div class=film-info-can>  
+          <div class="film-info-can">  
           <img class="image-item" src="./imgs/reel/arc.jpg" alt="img-1" />
           <div class="film-details">
             <div class="film-desc-deets">
@@ -188,7 +188,7 @@ require_once("./php/register.php");
             </div>
           </div>
           </div>
-          <div class=film-info-can>
+          <div class="film-info-can">
           <img class="image-item" src="./imgs/reel/arthur.jpg" alt="img-2" />
           <div class="film-details">
             <div class="film-desc-deets">
@@ -203,7 +203,7 @@ require_once("./php/register.php");
             </div>
           </div>
           </div>
-          <div class=film-info-can>
+          <div class="film-info-can">
           <img class="image-item" src="./imgs/reel/boby.jpg" alt="img-3" />
           <div class="film-details">
             <div class="film-desc-deets">
@@ -218,7 +218,7 @@ require_once("./php/register.php");
             </div>
           </div>
           </div>
-          <div class=film-info-can>
+          <div class="film-info-can">
           <img class="image-item" src="./imgs/reel/dunee.jpg" alt="img-4" />
           <div class="film-details">
             <div class="film-desc-deets">
@@ -233,7 +233,7 @@ require_once("./php/register.php");
             </div>
           </div>
           </div>
-          <div class=film-info-can>
+          <div class="film-info-can">
           <img class="image-item" src="./imgs/reel/ghosts.jpg" alt="img-5" />
           <div class="film-details">
             <div class="film-desc-deets">
@@ -248,7 +248,7 @@ require_once("./php/register.php");
             </div>
           </div>
           </div>
-          <div class=film-info-can>
+          <div class="film-info-can">
           <img class="image-item" src="./imgs/reel/gochilla.jpg" alt="img-6" />
           <div class="film-details">
             <div class="film-desc-deets">
@@ -263,7 +263,7 @@ require_once("./php/register.php");
             </div>
           </div>
           </div>
-          <div class=film-info-can>
+          <div class="film-info-can">
           <img class="image-item" src="./imgs/reel/monkey.jpg" alt="img-7" />
           <div class="film-details">
             <div class="film-desc-deets">
@@ -278,7 +278,7 @@ require_once("./php/register.php");
             </div>
           </div>
           </div>
-          <div class=film-info-can>
+          <div class="film-info-can">
           <img class="image-item" src="./imgs/reel/omen.jpg" alt="img-8" />
           <div class="film-details">
             <div class="film-desc-deets">
@@ -293,7 +293,7 @@ require_once("./php/register.php");
             </div>
           </div>
           </div>
-          <div class=film-info-can>
+          <div class="film-info-can">
           <img class="image-item" src="./imgs/reel/panda.jpg" alt="img-9" />
           <div class="film-details">
             <div class="film-desc-deets">
@@ -308,7 +308,7 @@ require_once("./php/register.php");
             </div>
           </div>
           </div>
-          <div class=film-info-can>
+          <div class="film-info-can">
           <img class="image-item" src="./imgs/reel/stingy.jpg" alt="img-10" />
           <div class="film-details">
             <div class="film-desc-deets">
