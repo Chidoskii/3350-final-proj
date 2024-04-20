@@ -36,8 +36,8 @@
 }
 .slider-wrapper .image-list {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(20, 1fr);
+  gap: 30px;
   font-size: 14pt;
   list-style: none;
   margin-bottom: 30px;

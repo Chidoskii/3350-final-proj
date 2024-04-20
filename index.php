@@ -3,6 +3,10 @@ require_once("./php/config.php");
 require_once("./php/login.php");
 require_once("./php/register.php");
 
+$config = configsTMDB();
+$upcoming = getUpcomingFilms();
+$base = $config['images']['secure_base_url'] . $config['images']['poster_sizes'][4];
+
 ?>
 
 
@@ -173,156 +177,39 @@ require_once("./php/register.php");
         <img src="./imgs/reel/chev-left.png" alt="..." class="chevy" />
         </button>
         <ul class="image-list">
-          <div class="film-info-can">  
-          <img class="image-item" src="./imgs/reel/arc.jpg" alt="img-1" />
-          <div class="film-details">
-            <div class="film-desc-deets">
-            <p class="img-reel-film-title">Movie Title</p>
-            <p class="img-reel-film-genre">Movie Genre</p>
-            </div>
-            <div class="film-ratings-deets">
-            <p class="img-reel-ratings-title">BuffScore</p>
-            <div class="img-reel-rating-can">
-            <p class="img-reel-ratings">75</p>
-            </div>
-            </div>
-          </div>
-          </div>
-          <div class="film-info-can">
-          <img class="image-item" src="./imgs/reel/arthur.jpg" alt="img-2" />
-          <div class="film-details">
-            <div class="film-desc-deets">
-            <p class="img-reel-film-title">Movie Title</p>
-            <p class="img-reel-film-genre">Movie Genre</p>
-            </div>
-            <div class="film-ratings-deets">
-            <p class="img-reel-ratings-title">BuffScore</p>
-            <div class="img-reel-rating-can">
-            <p class="img-reel-ratings">75</p>
-            </div>
-            </div>
-          </div>
-          </div>
-          <div class="film-info-can">
-          <img class="image-item" src="./imgs/reel/boby.jpg" alt="img-3" />
-          <div class="film-details">
-            <div class="film-desc-deets">
-            <p class="img-reel-film-title">Movie Title</p>
-            <p class="img-reel-film-genre">Movie Genre</p>
-            </div>
-            <div class="film-ratings-deets">
-            <p class="img-reel-ratings-title">BuffScore</p>
-            <div class="img-reel-rating-can">
-            <p class="img-reel-ratings">75</p>
-            </div>
-            </div>
-          </div>
-          </div>
-          <div class="film-info-can">
-          <img class="image-item" src="./imgs/reel/dunee.jpg" alt="img-4" />
-          <div class="film-details">
-            <div class="film-desc-deets">
-            <p class="img-reel-film-title">Movie Title</p>
-            <p class="img-reel-film-genre">Movie Genre</p>
-            </div>
-            <div class="film-ratings-deets">
-            <p class="img-reel-ratings-title">BuffScore</p>
-            <div class="img-reel-rating-can">
-            <p class="img-reel-ratings">75</p>
-            </div>
-            </div>
-          </div>
-          </div>
-          <div class="film-info-can">
-          <img class="image-item" src="./imgs/reel/ghosts.jpg" alt="img-5" />
-          <div class="film-details">
-            <div class="film-desc-deets">
-            <p class="img-reel-film-title">Movie Title</p>
-            <p class="img-reel-film-genre">Movie Genre</p>
-            </div>
-            <div class="film-ratings-deets">
-            <p class="img-reel-ratings-title">BuffScore</p>
-            <div class="img-reel-rating-can">
-            <p class="img-reel-ratings">75</p>
-            </div>
-            </div>
-          </div>
-          </div>
-          <div class="film-info-can">
-          <img class="image-item" src="./imgs/reel/gochilla.jpg" alt="img-6" />
-          <div class="film-details">
-            <div class="film-desc-deets">
-            <p class="img-reel-film-title">Movie Title</p>
-            <p class="img-reel-film-genre">Movie Genre</p>
-            </div>
-            <div class="film-ratings-deets">
-            <p class="img-reel-ratings-title">BuffScore</p>
-            <div class="img-reel-rating-can">
-            <p class="img-reel-ratings">75</p>
-            </div>
-            </div>
-          </div>
-          </div>
-          <div class="film-info-can">
-          <img class="image-item" src="./imgs/reel/monkey.jpg" alt="img-7" />
-          <div class="film-details">
-            <div class="film-desc-deets">
-            <p class="img-reel-film-title">Movie Title</p>
-            <p class="img-reel-film-genre">Movie Genre</p>
-            </div>
-            <div class="film-ratings-deets">
-            <p class="img-reel-ratings-title">BuffScore</p>
-            <div class="img-reel-rating-can">
-            <p class="img-reel-ratings">75</p>
-            </div>
-            </div>
-          </div>
-          </div>
-          <div class="film-info-can">
-          <img class="image-item" src="./imgs/reel/omen.jpg" alt="img-8" />
-          <div class="film-details">
-            <div class="film-desc-deets">
-            <p class="img-reel-film-title">Movie Title</p>
-            <p class="img-reel-film-genre">Movie Genre</p>
-            </div>
-            <div class="film-ratings-deets">
-            <p class="img-reel-ratings-title">BuffScore</p>
-            <div class="img-reel-rating-can">
-            <p class="img-reel-ratings">75</p>
-            </div>
-            </div>
-          </div>
-          </div>
-          <div class="film-info-can">
-          <img class="image-item" src="./imgs/reel/panda.jpg" alt="img-9" />
-          <div class="film-details">
-            <div class="film-desc-deets">
-            <p class="img-reel-film-title">Movie Title</p>
-            <p class="img-reel-film-genre">Movie Genre</p>
-            </div>
-            <div class="film-ratings-deets">
-            <p class="img-reel-ratings-title">BuffScore</p>
-            <div class="img-reel-rating-can">
-            <p class="img-reel-ratings">75</p>
-            </div>
-            </div>
-          </div>
-          </div>
-          <div class="film-info-can">
-          <img class="image-item" src="./imgs/reel/stingy.jpg" alt="img-10" />
-          <div class="film-details">
-            <div class="film-desc-deets">
-            <p class="img-reel-film-title">Movie Title</p>
-            <p class="img-reel-film-genre">Movie Genre</p>
-            </div>
-            <div class="film-ratings-deets">
-            <p class="img-reel-ratings-title">BuffScore</p>
-            <div class="img-reel-rating-can">
-            <p class="img-reel-ratings">75</p>
-            </div>
-            </div>
-          </div>
-        </div>
+          <?php
+            foreach ($upcoming as $key => $movie) {
+              if ($key == "results") {
+                foreach ($movie as $key => $value) {
+                  $id = $value['id'];
+                  $temp = $value['original_title'];
+                  $title = '"'. $temp . '"';
+                  $release = $value['release_date'];
+                  $img = $base . $value['poster_path'];
+                  $rating = $value['vote_average'];
+                  
+                  $card = <<<CONTENT
+                  <div class="film-info-can">  
+                    <img class="image-item" src="$img" alt="img-1" />
+                    <div class="film-details">
+                      <div class="film-desc-deets">
+                        <p class="img-reel-film-title">$title</p>
+                        <p class="img-reel-film-genre">$release</p>
+                      </div>
+                      <div class="film-ratings-deets">
+                        <p class="img-reel-ratings-title">Rating</p>
+                        <div class="img-reel-rating-can">
+                          <p class="img-reel-ratings">$rating</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  CONTENT;
+                echo $card;
+                }
+              }
+            }
+          ?>          
         </ul>
         <button id="next-slide" class="slide-button material-symbols-rounded">
           <img src="./imgs/reel/chev-right.png" alt="..." class="chevy" />
@@ -335,7 +222,6 @@ require_once("./php/register.php");
       </div>
     </div>
 </div>
-
 
 
 <br>
