@@ -170,7 +170,7 @@ $base = $config['images']['secure_base_url'] . $config['images']['poster_sizes']
     <div class="cheeky-hook">Ratings and reviews from the best critics in the business </div>
   </div>
   <div class="reel-container">
-    <h2 class="movie-reel-title">New Releases</h2>
+    <h2 class="movie-reel-title">Upcoming</h2>
     <br>
       <div class="slider-wrapper">
         <button id="prev-slide" class="slide-button material-symbols-rounded">
@@ -221,6 +221,60 @@ $base = $config['images']['secure_base_url'] . $config['images']['poster_sizes']
         </div>
       </div>
     </div>
+
+    <div class="reel-container">
+    <h2 class="movie-reel-title">New Releases</h2>
+    <br>
+      <div class="slider-wrapper">
+        <button id="new-prev-slide" class="nr-slide-button material-symbols-rounded">
+        <img src="./imgs/reel/chev-left.png" alt="..." class="chevy" />
+        </button>
+        <ul class="new-r-image-list">
+          <?php
+            foreach ($upcoming as $key => $movie) {
+              if ($key == "results") {
+                foreach ($movie as $key => $value) {
+                  $id = $value['id'];
+                  $temp = $value['original_title'];
+                  $title = '"'. $temp . '"';
+                  $release = $value['release_date'];
+                  $img = $base . $value['poster_path'];
+                  $rating = $value['vote_average'];
+                  
+                  $card = <<<CONTENT
+                  <div class="film-info-can">  
+                    <img class="image-item" src="$img" alt="img-1" />
+                    <div class="film-details">
+                      <div class="film-desc-deets">
+                        <p class="img-reel-film-title">$title</p>
+                        <p class="img-reel-film-genre">$release</p>
+                      </div>
+                      <div class="film-ratings-deets">
+                        <p class="img-reel-ratings-title">Rating</p>
+                        <div class="img-reel-rating-can">
+                          <p class="img-reel-ratings">$rating</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  CONTENT;
+                echo $card;
+                }
+              }
+            }
+          ?>          
+        </ul>
+        <button id="new-next-slide" class="nr-slide-button material-symbols-rounded">
+          <img src="./imgs/reel/chev-right.png" alt="..." class="chevy" />
+        </button>
+      </div>
+      <div class="nr-slider-scrollbar">
+        <div class="scrollbar-track">
+          <div class="nr-scrollbar-thumb"></div>
+        </div>
+      </div>
+    </div>
+    
 </div>
 
 
