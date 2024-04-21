@@ -35,9 +35,9 @@ function closeOffcanvas() {
 // Function to register User
 function registerUser() {
   //alert('wOrKs'); //Call test
-  var uname = document.getElementById('uname').value;
-  var email = document.getElementById('email').value;
-  var psswd = document.getElementById('psswd').value;
+  let uname = document.getElementById('uname').value;
+  let email = document.getElementById('email').value;
+  let psswd = document.getElementById('psswd').value;
   /*if (!uname || !email || !psswd) {
     alert(psswd);
     alert("Empty String");
