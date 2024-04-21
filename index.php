@@ -5,6 +5,7 @@ require_once("./php/register.php");
 
 $config = configsTMDB();
 $upcoming = getUpcomingFilms();
+$playing = getNowPlaying();
 $base = $config['images']['secure_base_url'] . $config['images']['poster_sizes'][4];
 
 ?>
@@ -231,7 +232,7 @@ $base = $config['images']['secure_base_url'] . $config['images']['poster_sizes']
         </button>
         <ul class="new-r-image-list">
           <?php
-            foreach ($upcoming as $key => $movie) {
+            foreach ($playing as $key => $movie) {
               if ($key == "results") {
                 foreach ($movie as $key => $value) {
                   $id = $value['id'];
@@ -247,7 +248,7 @@ $base = $config['images']['secure_base_url'] . $config['images']['poster_sizes']
                     <div class="film-details">
                       <div class="film-desc-deets">
                         <p class="img-reel-film-title">$title</p>
-                        <p class="img-reel-film-genre">$release</p>
+                        <p class="img-reel-film-genre">Realesed: $release</p>
                       </div>
                       <div class="film-ratings-deets">
                         <p class="img-reel-ratings-title">Rating</p>
