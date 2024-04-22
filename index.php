@@ -186,6 +186,8 @@ $base = $config['images']['secure_base_url'] . $config['images']['poster_sizes']
                   $temp = $value['original_title'];
                   $title = '"'. $temp . '"';
                   $release = $value['release_date'];
+                  $date = date_create($release);
+                  $format = date_format($date, 'F jS Y');
                   $img = $base . $value['poster_path'];
                   $rating = $value['vote_average'];
                   
@@ -195,7 +197,7 @@ $base = $config['images']['secure_base_url'] . $config['images']['poster_sizes']
                     <div class="film-details">
                       <div class="film-desc-deets">
                         <p class="img-reel-film-title">$title</p>
-                        <p class="img-reel-film-genre">$release</p>
+                        <p class="img-reel-film-genre">Released: $format</p>
                       </div>
                       <div class="film-ratings-deets">
                         <p class="img-reel-ratings-title">Rating</p>
@@ -239,6 +241,8 @@ $base = $config['images']['secure_base_url'] . $config['images']['poster_sizes']
                   $temp = $value['original_title'];
                   $title = '"'. $temp . '"';
                   $release = $value['release_date'];
+                  $date = date_create($release);
+                  $format = date_format($date, 'F jS Y');
                   $img = $base . $value['poster_path'];
                   $rating = $value['vote_average'];
                   
@@ -248,7 +252,7 @@ $base = $config['images']['secure_base_url'] . $config['images']['poster_sizes']
                     <div class="film-details">
                       <div class="film-desc-deets">
                         <p class="img-reel-film-title">$title</p>
-                        <p class="img-reel-film-genre">Realesed: $release</p>
+                        <p class="img-reel-film-genre">Realesed: $format</p>
                       </div>
                       <div class="film-ratings-deets">
                         <p class="img-reel-ratings-title">Rating</p>
