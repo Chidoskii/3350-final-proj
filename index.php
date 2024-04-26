@@ -196,7 +196,9 @@ $base = $config['images']['secure_base_url'] . $config['images']['poster_sizes']
                     <img class="image-item" src="$img" alt="img-1" />
                     <div class="film-details">
                       <div class="film-desc-deets">
-                        <p class="img-reel-film-title">$title</p>
+                        <a class="film-title-link" href="./pages/movie.php?mid=$id" rel="noopener noreferrer">
+                          <p class="img-reel-film-title">$title</p>
+                        </a>
                         <p class="img-reel-film-genre">Released: $format</p>
                       </div>
                       <div class="film-ratings-deets">
@@ -251,7 +253,9 @@ $base = $config['images']['secure_base_url'] . $config['images']['poster_sizes']
                     <img class="image-item" src="$img" alt="img-1" />
                     <div class="film-details">
                       <div class="film-desc-deets">
-                        <p class="img-reel-film-title">$title</p>
+                        <a class="film-title-link" href="./pages/movie.php?mid=$id" rel="noopener noreferrer">
+                         <p class="img-reel-film-title">$title</p>
+                        </a>
                         <p class="img-reel-film-genre">Realesed: $format</p>
                       </div>
                       <div class="film-ratings-deets">

@@ -164,8 +164,63 @@ body {
 .hidden {
   display: none;
 }
+/* -------------------------------------- MOVIE PAGE ------------------------------------------ */
 
-/* Footer styling */
+.backdrop-showcase {
+  min-height: 50vh;
+  width: 100%;
+  margin: 0 auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.backdrop-showcase-mobile {
+  display: none;
+}
+
+.moviepage-contents {
+  min-height: 100vh;
+  width: 100%;
+}
+
+.film-cover-image-can {
+  width: 250px;
+}
+
+.movie-cover-img {
+  width: 100%;
+  border-radius: 15px;
+  border: rgb(240, 240, 240) solid 1px;
+}
+
+.film-package {
+  display: flex;
+  align-items: center;
+  padding-top: 85px;
+  padding-bottom: 40px;
+  backdrop-filter: blur(200px);
+  width: 100%;
+}
+
+.mp-film-bd-info {
+  color: aliceblue;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  margin: auto 75px;
+  width: 60%;
+}
+
+.mp-film-title {
+  padding: 7px;
+  margin: 0 auto;
+  font-family: 'Orbitron', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+}
+
+/******************************************** Footer styling **********************/
 footer {
   background-color: rgb(240, 240, 240);
   border-top: goldenrod 15px solid;
@@ -259,5 +314,45 @@ footer {
 
   .cheeky-hook {
     font-size: 11pt;
+  }
+
+  .backdrop-showcase {
+    display: none;
+  }
+
+  .backdrop-showcase-mobile {
+    display: flex;
+    min-height: 40vh;
+    width: 100%;
+    margin: 0 auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .film-package {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .film-package {
+    padding: 125px 0 100px 60px;
+  }
+}
+
+@media screen and (min-width: 1050px) {
+  .film-package {
+    padding-left: 100px;
+  }
+}
+
+@media screen and (min-width: 1700px) {
+  .film-package {
+    padding-left: 200px;
   }
 }

@@ -71,7 +71,7 @@ function findMovieByID($apikey, $id){
 
 
 
-while ($count < 1001) {
+while ($count < 2001) {
   findMovieByID($TMDB_API_KEY, $count);
   $count++;
 }
