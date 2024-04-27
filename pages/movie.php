@@ -11,6 +11,9 @@ if($_SESSION["logged_in"] == false){
 
 $mID = "";
 $deets = "";
+$similar = "";
+$cast = "";
+$filler = "../imgs/filler.jpg";
 $config = configsTMDB();
 $poster_base = $config['images']['secure_base_url'] . $config['images']['poster_sizes'][4];
 $backdrop_base = $config['images']['secure_base_url'] . $config['images']['backdrop_sizes'][3];
@@ -19,9 +22,12 @@ $poster = "";
 $backdrop = "";
 $backdrop_small = "";
 
+
 if (isset($_GET["mid"])){
   $mID = $_GET["mid"];
   $deets = getMovieDeets($TMDB_API_KEY, $mID);
+  $similar = getSimilarMovies($TMDB_API_KEY, $mID);
+  $cast = getCast($TMDB_API_KEY, $mID);
   $poster =  $poster_base . $deets['poster_path'];
   $backdrop =  $backdrop_base . $deets['backdrop_path'];
   $backdrop_small =  $backdrop_base_small . $deets['backdrop_path'];
@@ -43,6 +49,7 @@ if (isset($_GET["mid"])){
     <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,400;0,600;0,700;1,600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/navbar.css">
+    <link rel="stylesheet" href="../styles/reel.css">
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="shortcut icon" href="../../imgs/favicon.ico" />
 </head>
@@ -179,6 +186,21 @@ if (isset($_GET["mid"])){
     <div class="film-cover-image-can"><img class="movie-cover-img" src="<?php echo $poster; ?>" /></div>
     <div class="mp-film-bd-info">
       <h1 class="mp-film-title"><?php echo $deets['title']; ?></h1>
+      <p class="mp-film-desc"><?php echo $deets['overview']; ?></p>
+      <div class="mp-film-opts-can">
+        <div class="mp-film-opts rating">
+          <div class="mp-film-opts-hdr ">TMDB RATING</div>
+          <div class="mp-film-opts-item tmdb-rating"><?php echo number_format($deets['vote_average'], 1); ?>/10</div>
+        </div>
+        <div class="mp-film-opts">
+          <div class="mp-film-opts-hdr">REVIEW</div>
+          <div class="mp-film-opts-item"></div>
+        </div>
+        <div class="mp-film-opts">
+          <div class="mp-film-opts-hdr">WATCHLIST</div>
+          <div class="mp-film-opts-item"></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -190,7 +212,123 @@ if (isset($_GET["mid"])){
     </div>
   </div>
 </div>
-<div class="moviepage-contents container-fluid">
+<div class="moviepage-contents container">
+
+    <div class="mp-section-hdr">Videos</div>
+    <div class="reel-container">
+    <h2 class="movie-reel-title">Cast</h2>
+    <br>
+      <div class="slider-wrapper">
+        <button id="prev-slide" class="slide-button material-symbols-rounded">
+        <img src="../imgs/reel/chev-left.png" alt="..." class="chevy" />
+        </button>
+        <ul class="image-list">
+          <?php
+            foreach ($cast as $key => $person) {
+              if ($key == "cast") {
+                foreach ($person as $key => $value) {
+                  $id = $value['id'];
+                  $name = $value['name'];
+                  $role = $value['known_for_department'];
+                  $img = $poster_base . $value['profile_path'];
+                  $fame = number_format($value['popularity'],1);
+
+                  if ($img == $poster_base) {
+                    $img = $filler;
+                  }
+                  
+                  $card = <<<CONTENT
+                  <div class="film-info-can">  
+                    <img class="image-item" src="$img" alt="Yikes!" />
+                    <div class="film-details">
+                      <div class="film-desc-deets">
+                        <a class="film-title-link" href="#" rel="noopener noreferrer">
+                          <p class="img-reel-film-title">$name</p>
+                        </a>
+                        <p class="img-reel-film-genre">Role: $role</p>
+                      </div>
+                      <div class="film-ratings-deets">
+                        <p class="img-reel-ratings-title">Fame</p>
+                        <div class="img-reel-rating-can">
+                          <p class="img-reel-ratings">$fame</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  CONTENT;
+                echo $card;
+                }
+              }
+            }
+          ?>          
+        </ul>
+        <button id="next-slide" class="slide-button material-symbols-rounded">
+          <img src="../imgs/reel/chev-right.png" alt="..." class="chevy" />
+        </button>
+      </div>
+      <div class="slider-scrollbar">
+        <div class="scrollbar-track">
+          <div class="scrollbar-thumb"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reel-container">
+    <h2 class="movie-reel-title">Similar</h2>
+    <br>
+      <div class="slider-wrapper">
+        <button id="new-prev-slide" class="nr-slide-button material-symbols-rounded">
+        <img src="../imgs/reel/chev-left.png" alt="..." class="chevy" />
+        </button>
+        <ul class="new-r-image-list">
+          <?php
+            foreach ($similar as $key => $movie) {
+              if ($key == "results") {
+                foreach ($movie as $key => $value) {
+                  $id = $value['id'];
+                  $temp = $value['original_title'];
+                  $title = '"'. $temp . '"';
+                  $release = $value['release_date'];
+                  $date = date_create($release);
+                  $format = date_format($date, 'F jS Y');
+                  $img = $poster_base . $value['poster_path'];
+                  $rating = number_format($value['vote_average'],1);
+                  
+                  $card = <<<CONTENT
+                  <div class="film-info-can">  
+                    <img class="image-item" src="$img" alt="Yikes!" />
+                    <div class="film-details">
+                      <div class="film-desc-deets">
+                        <a class="film-title-link" href="./movie.php?mid=$id" rel="noopener noreferrer">
+                         <p class="img-reel-film-title">$title</p>
+                        </a>
+                        <p class="img-reel-film-genre">Realesed: $format</p>
+                      </div>
+                      <div class="film-ratings-deets">
+                        <p class="img-reel-ratings-title">Rating</p>
+                        <div class="img-reel-rating-can">
+                          <p class="img-reel-ratings">$rating</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  CONTENT;
+                echo $card;
+                }
+              }
+            }
+          ?>          
+        </ul>
+        <button id="new-next-slide" class="nr-slide-button material-symbols-rounded">
+          <img src="../imgs/reel/chev-right.png" alt="..." class="chevy" />
+        </button>
+      </div>
+      <div class="nr-slider-scrollbar">
+        <div class="scrollbar-track">
+          <div class="nr-scrollbar-thumb"></div>
+        </div>
+      </div>
+    </div>
   
 </div>
 
@@ -198,6 +336,7 @@ if (isset($_GET["mid"])){
 require_once("./footer.php");
 ?>
 
+<script src="../scripts/slide.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>

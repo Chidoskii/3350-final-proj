@@ -6,6 +6,7 @@ require_once("./php/register.php");
 $config = configsTMDB();
 $upcoming = getUpcomingFilms();
 $playing = getNowPlaying();
+$filler = "./imgs/mona.jpg";
 $base = $config['images']['secure_base_url'] . $config['images']['poster_sizes'][4];
 
 ?>
@@ -189,11 +190,15 @@ $base = $config['images']['secure_base_url'] . $config['images']['poster_sizes']
                   $date = date_create($release);
                   $format = date_format($date, 'F jS Y');
                   $img = $base . $value['poster_path'];
-                  $rating = $value['vote_average'];
+                  $rating = number_format($value['vote_average'],1);
+
+                  if ($img == $base) {
+                    $img = $filler;
+                  }
                   
                   $card = <<<CONTENT
                   <div class="film-info-can">  
-                    <img class="image-item" src="$img" alt="img-1" />
+                    <img class="image-item" src="$img" alt="Yikes!" />
                     <div class="film-details">
                       <div class="film-desc-deets">
                         <a class="film-title-link" href="./pages/movie.php?mid=$id" rel="noopener noreferrer">
@@ -246,11 +251,15 @@ $base = $config['images']['secure_base_url'] . $config['images']['poster_sizes']
                   $date = date_create($release);
                   $format = date_format($date, 'F jS Y');
                   $img = $base . $value['poster_path'];
-                  $rating = $value['vote_average'];
+                  $rating = number_format($value['vote_average'],1);
+
+                  if ($img == $base) {
+                    $img = $filler;
+                  }
                   
                   $card = <<<CONTENT
                   <div class="film-info-can">  
-                    <img class="image-item" src="$img" alt="img-1" />
+                    <img class="image-item" src="$img" alt="Yikes!" />
                     <div class="film-details">
                       <div class="film-desc-deets">
                         <a class="film-title-link" href="./pages/movie.php?mid=$id" rel="noopener noreferrer">
@@ -312,10 +321,8 @@ $base = $config['images']['secure_base_url'] . $config['images']['poster_sizes']
         </div>
       </div>
       <div class="footy-links-r">
-        <p class="footy-sub-header">Customer Support</p>
-        <a class="footy-link-list" href="#">Your Account</a>
-        <a class="footy-link-list" href="#">Help Center</a>
-        <a class="footy-link-list" href="#">Contact Us</a>
+        <a class="footy-link-list" href="https://www.themoviedb.org/" target="_blank" rel="noopener noreferrer" ><img alt="..." src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_1-5bdc75aaebeb75dc7ae79426ddd9be3b2be1e342510f8202baf6bffa71d7f5c4.svg" class="footy-tmdb-icon"/></a>
+        <p class="attribution">This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
       </div>
     </div>
     <div class="footer-copyright">
