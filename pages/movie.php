@@ -13,8 +13,10 @@ $mID = "";
 $deets = "";
 $similar = "";
 $cast = "";
+$videos = "";
 $filler = "../imgs/filler.jpg";
 $filler2 = "../imgs/mona.jpg";
+$youtube = "https://www.youtube.com/embed/";
 $config = configsTMDB();
 $poster_base = $config['images']['secure_base_url'] . $config['images']['poster_sizes'][4];
 $backdrop_base = $config['images']['secure_base_url'] . $config['images']['backdrop_sizes'][3];
@@ -29,6 +31,7 @@ if (isset($_GET["mid"])){
   $deets = getMovieDeets($TMDB_API_KEY, $mID);
   $similar = getSimilarMovies($TMDB_API_KEY, $mID);
   $cast = getCast($TMDB_API_KEY, $mID);
+  $videos = getVideos($TMDB_API_KEY, $mID);
   $poster =  $poster_base . $deets['poster_path'];
   $backdrop =  $backdrop_base . $deets['backdrop_path'];
   $backdrop_small =  $backdrop_base_small . $deets['backdrop_path'];
@@ -215,7 +218,37 @@ if (isset($_GET["mid"])){
 </div>
 <div class="moviepage-contents container">
 
-    <div class="mp-section-hdr">Videos</div>
+    <div class="mp-video-section">
+      <h1 class="mp-section-hdr">Videos</h1>
+      <div class="mp-videos-can">
+      <?php
+            if (!empty($videos['results'])) {
+              foreach ($videos as $key => $link) {
+                if ($key == "results") {
+                  foreach ($link as $key => $value) {
+                    $site = $value['site'];
+                    $source = $value['key'];
+                    $type = $value['type'];
+                    $url = $youtube . $source;
+                    
+                    $card = <<<CONTENT
+                    <iframe class="embed-vid" width="420" height="315"
+                      src="$url">
+                    </iframe>
+                    <br>
+                    CONTENT;
+                  echo $card;
+                  }
+                }
+              }
+            } else {
+              echo "<p>There are no videos, unfortunately.</p><br>";
+            }
+          ?> 
+      </div>
+    </div>
+
+
     <div class="reel-container">
     <h2 class="movie-reel-title">Cast</h2>
     <br>

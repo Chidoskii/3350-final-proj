@@ -269,6 +269,31 @@ body {
   font-size: 18pt;
 }
 
+.mp-section-hdr {
+  font-family: 'Orbitron', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-size: 22pt;
+  font-style: normal;
+  text-align: center;
+}
+
+.mp-video-section {
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px;
+}
+
+.mp-videos-can {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.embed-vid {
+  margin: 5px;
+}
+
 /******************************************** Footer styling **********************/
 footer {
   background-color: rgb(240, 240, 240);
