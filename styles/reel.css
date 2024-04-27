@@ -44,7 +44,20 @@
 .slider-wrapper .image-list,
 .new-r-image-list {
   display: grid;
-  grid-template-columns: repeat(30, 1fr);
+  grid-template-columns: repeat(20, 1fr);
+  gap: 30px;
+  font-size: 14pt;
+  list-style: none;
+  margin-bottom: 30px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+.slider-wrapper .credits-list {
+  display: grid;
+  grid-template-columns: repeat(100, 1fr);
   gap: 30px;
   font-size: 14pt;
   list-style: none;
@@ -56,11 +69,13 @@
   user-select: none; /* Standard syntax */
 }
 .slider-wrapper .image-list::-webkit-scrollbar,
-.new-r-image-list::-webkit-scrollbar {
+.new-r-image-list::-webkit-scrollbar,
+.slider-wrapper .credits-list::-webkit-scrollbar {
   display: none;
 }
 .slider-wrapper .image-list .image-item,
-.new-r-image-list .image-item {
+.new-r-image-list .image-item,
+.slider-wrapper .credits-list .image-item {
   width: 250px;
   height: 375px;
   object-fit: cover;

@@ -14,6 +14,7 @@ $deets = "";
 $similar = "";
 $cast = "";
 $filler = "../imgs/filler.jpg";
+$filler2 = "../imgs/mona.jpg";
 $config = configsTMDB();
 $poster_base = $config['images']['secure_base_url'] . $config['images']['poster_sizes'][4];
 $backdrop_base = $config['images']['secure_base_url'] . $config['images']['backdrop_sizes'][3];
@@ -93,7 +94,7 @@ if (isset($_GET["mid"])){
                   <img alt="user" src="../imgs/user-circle.png" class="user-logo"/>
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">MyProfile Settings</a></li>
+                    <li><a class="dropdown-item" href="./preferrences.php">MyProfile Settings</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="../php/logout.php">LOGOUT </a></li>
                   </ul>
@@ -222,7 +223,7 @@ if (isset($_GET["mid"])){
         <button id="prev-slide" class="slide-button material-symbols-rounded">
         <img src="../imgs/reel/chev-left.png" alt="..." class="chevy" />
         </button>
-        <ul class="image-list">
+        <ul class="credits-list">
           <?php
             foreach ($cast as $key => $person) {
               if ($key == "cast") {
@@ -293,6 +294,10 @@ if (isset($_GET["mid"])){
                   $format = date_format($date, 'F jS Y');
                   $img = $poster_base . $value['poster_path'];
                   $rating = number_format($value['vote_average'],1);
+
+                  if ($img == $poster_base) {
+                    $img = $filler2;
+                  }
                   
                   $card = <<<CONTENT
                   <div class="film-info-can">  
@@ -336,7 +341,7 @@ if (isset($_GET["mid"])){
 require_once("./footer.php");
 ?>
 
-<script src="../scripts/slide.js"></script>
+<script src="../scripts/mp-slide.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
