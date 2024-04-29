@@ -1,6 +1,6 @@
 <?php
-require_once("./php/config.php");
-require_once("./php/functions.php");
+require_once("config.php");
+require_once("functions.php");
 
 if (isset($_POST["Login"])) {
     $login_email = $_POST["email"];

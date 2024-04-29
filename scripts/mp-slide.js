@@ -155,5 +155,16 @@ function showRateSlider() {
   }
 }
 
+function rateToggle() {
+  let rate = document.getElementById('rate-range-can');
+  if (rate.classList.contains('hideme')) {
+    rate.classList.remove('hideme');
+    rate.classList.add('showme');
+  } else {
+    rate.classList.remove('showme');
+    rate.classList.add('hideme');
+  }
+}
+
 window.addEventListener('resize', initSlider);
 window.addEventListener('load', initSlider);

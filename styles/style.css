@@ -202,7 +202,7 @@ body {
   align-items: center;
   padding-top: 85px;
   padding-bottom: 40px;
-  backdrop-filter: blur(200px);
+  backdrop-filter: blur(1px);
   width: 100%;
 }
 

@@ -1,6 +1,40 @@
 <?php
 require_once("../php/config.php");
+require_once("../php/functions.php");
+require_once("../php/login.php");
+require_once("../php/register.php");
 
+$giverating =  <<<END
+                  <span class="material-symbols-outlined cp-rating-star mso-icon" id="rating-btn" onclick="rateToggle()">
+                  star_rate
+                  </span>
+                  END;
+$onthelist = <<<CONTENT
+                  <form method="post" action="">
+                    <button type="submit" name="removewatch" class="btn btn-dark wl-form-btn">
+                      <span class="material-symbols-outlined mso-icon on-the-list">
+                        playlist_add_check
+                      </span> 
+                    </button>
+                  </form>
+                  CONTENT;
+$notonthelist = <<<CONTENT
+                  <form method="post" action="">
+                    <button type="submit" name="watchlist" class="btn btn-dark wl-form-btn"> 
+                      <span class="material-symbols-outlined mso-icon" id="watchlist-btn">
+                        list_alt_add
+                      </span>
+                    </button>
+                  </form>
+                  CONTENT;
+
+if (isset($_SESSION["login_email"])){
+  $wtf = getUserId($_SESSION["login_email"]);
+  $watchID = getWatchlistId($wtf);
+}
+
+$critic = "";
+$nod = "";
 $mID = "";
 $deets = "";
 $similar = "";
@@ -20,6 +54,14 @@ $backdrop_small = "";
 
 if (isset($_GET["mid"])){
   $mID = $_GET["mid"];
+  if (isset($_SESSION["login_email"])){
+    $db = get_mysqli_connection();
+    $query = $db->prepare("SELECT * FROM Ratings WHERE mID = ? and uID = ?");
+    $query->bind_param("ii", $mID, $wtf);
+    $query->execute();
+    $result = $query->get_result();
+    $myratings = $result->fetch_all(MYSQLI_ASSOC);
+  }
   $deets = getMovieDeets($TMDB_API_KEY, $mID);
   $similar = getSimilarMovies($TMDB_API_KEY, $mID);
   $cast = getCast($TMDB_API_KEY, $mID);
@@ -29,7 +71,41 @@ if (isset($_GET["mid"])){
   $backdrop_small =  $backdrop_base_small . $deets['backdrop_path'];
 }
 
+if(isset($_POST['myrate'])) {
+  $myrating = number_format($_POST["rating"],1);
+  $db = get_mysqli_connection();
+  $query = $db->prepare("INSERT INTO Ratings (mID, uID, rating) VALUES (?, ?, ?)");
+  $query->bind_param('iid', $mID, $wtf, $myrating);
+  $query->execute();
+  $query = $db->prepare("SELECT * FROM Ratings WHERE mID = ? and uID = ?");
+  $query->bind_param("ii", $mID, $wtf);
+  $query->execute();
+  $result = $query->get_result();
+  $myratings = $result->fetch_all(MYSQLI_ASSOC);
+}
 
+if(isset($_POST['watchlist'])) {
+  $db = get_mysqli_connection();
+  $query = $db->prepare("INSERT INTO listItems (mID, lID) VALUES (?, ?)");
+  $query->bind_param('ii', $mID, $wtf);
+  $query->execute();
+}
+
+if(isset($_POST['removewatch'])) {
+  $db = get_mysqli_connection();
+  $query = $db->prepare("DELETE FROM listItems where mID = ? and lID = ?");
+  $query->bind_param('ii', $mID, $watchID);
+  $query->execute();
+}
+
+if(isset($_POST['critic'])) {
+  $critic = $_POST["review"];
+  $nod = $_POST["nod"];
+  $db = get_mysqli_connection();
+  $query = $db->prepare("INSERT INTO Reviews (u_ID, mID, critique, NOD) VALUES (?,?,?,?)");
+  $query->bind_param('iisi', $wtf, $mID, $critic, $nod);
+  $query->execute();
+}
 
 ?>
 
@@ -47,6 +123,7 @@ if (isset($_GET["mid"])){
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../styles/navbar.css">
     <link rel="stylesheet" href="../styles/reel.css">
+    <link rel="stylesheet" href="../styles/movie.css">
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="shortcut icon" href="../../imgs/favicon.ico" />
 </head>
@@ -120,17 +197,17 @@ if (isset($_GET["mid"])){
       <div class="modal-body creds-modal-body">
         <div class="creds-msg">Welcome back!</div>
         <div class="creds-form-can">
-          <form>
+          <form method="post" action="">
             <label for="email" class="form-label creds-label">Email</label><br>
             <input type="text" id="email" name="email" class="form-control creds-input-field"><br>
             <label for="psswd" class="form-label creds-label">Password</label><br>
-            <input type="text" id="psswd" name="psswd" class="form-control creds-input-field">
-          </form>
+            <input type="password" id="psswd" name="psswd" class="form-control creds-input-field">
           <br>
           <div class="creds-btns-can">
           <button type="submit" name="Login" class="btn btn-primary creds-form-btns creds-form-confirm ">Sign In</button>
           <button type="button" class="btn btn-secondary creds-form-btns" data-bs-dismiss="modal">Close</button>
           </div>
+          </form>
         </div>
       </div>
     </div>
@@ -158,19 +235,19 @@ if (isset($_GET["mid"])){
       Join TheMovieBuffs today to rate, review, and discover new movies and adventures!
       </div>
         <div class="creds-form-can">
-          <form>
+          <form method="post" action="">
             <label for="uname" class="form-label creds-label">Username</label><br>
             <input type="text" id="uname" name="uname" class="form-control creds-input-field"><br>
             <label for="email" class="form-label creds-label">Email</label><br>
             <input type="text" id="email" name="email" class="form-control creds-input-field"><br>
             <label for="psswd" class="form-label creds-label">Password</label><br>
-            <input type="text" id="psswd" name="psswd" class="form-control creds-input-field">
-          </form>
+            <input type="password" id="psswd" name="psswd" class="form-control creds-input-field">
           <br>
           <div class="creds-btns-can">
-          <button type="submit" name="register" class="btn btn-primary creds-form-btns creds-form-confirm">Resgister</button>
-          <button type="button" class="btn btn-secondary creds-form-btns" data-bs-dismiss="modal">Close</button>
-        </div>
+            <button type="submit" name="register" class="btn btn-primary creds-form-btns creds-form-confirm">Resgister</button>
+            <button type="button" class="btn btn-secondary creds-form-btns" data-bs-dismiss="modal">Close</button>
+          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -178,72 +255,86 @@ if (isset($_GET["mid"])){
 </div>
 
 <!-- Page Contents -->
-<div class="backdrop-showcase" style="background-image: url(<?php echo $backdrop; ?>)">\
+<div class="backdrop-showcase" style="background-image: url(<?php echo $backdrop; ?>)">
   <div class="film-package">
     <div class="film-cover-image-can"><img class="movie-cover-img" src="<?php echo $poster; ?>" /></div>
     <div class="mp-film-bd-info">
       <h1 class="mp-film-title"><?php echo $deets['title']; ?></h1>
       <p class="mp-film-desc"><?php echo $deets['overview']; ?></p>
       <div class="mp-opts-grouping">
-        <div class="rate-form-slider hideme" id="rate-range-can">
+        <div class="rate-slider-can hideme" id="rate-range-can">
             <label for="rateRange" class="form-label star-form-label">Scale: 0 - 10</label>
-            <div class="stars-mssg">
-            <output class="range-output">0</output>
-            <span class="material-symbols-outlined mp-ms-icon rating-icon slider-star">
-              star_rate
-            </span>
-            <input type="range" class="form-range" min="0" max="10" step="0.1" oninput="this.previousElementSibling.previousElementSibling.value = this.value" id="rateRange" name="rating">
-            <button type="submit" name="myRating" class="btn btn-success rate-sub-btn">
-              <span class="material-symbols-outlined">
-                check_small
-              </span>
-            </button>
+            <div class="slider-deets">
+              <form method="post" action="" class="rate-form">
+                <output class="star-track">0</output>
+                <span class="material-symbols-outlined grade-star">
+                  grade
+                </span>
+              <input type="range" class="form-range" min="0" max="10" step="0.1" id="mp-rate-slider" name="rating" oninput="this.previousElementSibling.previousElementSibling.value = this.value">
+              <button type="submit" name="myrate" class="btn btn-success rate-check-btn">
+                <span class="material-symbols-outlined">
+                  check_small
+                </span>
+              </button>
+              </form>
             </div>
         </div>
         <div class="mp-film-opts-can">
-          <div class="mp-film-opts rating">
-            <div class="mp-film-opts-hdr ">TMDB RATING</div>
-            <div class="mp-film-opts-item tmdb-rating"><?php echo number_format($deets['vote_average'], 1); ?>/10</div>
-          </div>
-          <div class="mp-film-opts rating">
-            <div class="mp-film-opts-hdr">YOUR RATING</div>
-            <div class="mp-film-opts-item">
-            <button onclick="showRateSlider()" class="btn btn-dark rate-btn">
-                <span class="material-symbols-outlined mp-ms-icon rating-icon">
-                  star_rate
-                </span>
-            </button>
+              <div class="mp-film-opts rating">
+                <div class="mp-film-opts-hdr ">TMDB RATING</div>
+                <div class="mp-film-opts-item tmdb-rating"><?php echo number_format($deets['vote_average'], 1); ?>/10</div>
+              </div>
+              <div class="mp-film-opts rating">
+                <div class="mp-film-opts-hdr ">YOUR RATING</div>
+                <div class="mp-film-opts-item tmdb-rating">
+                <?php
+                if (isset($_SESSION["login_email"])){
+                  if (count($myratings) > 0) {
+                    echo number_format($myratings[0]['rating'], 1) . "/10"; 
+                  }
+                  else {
+                    echo $giverating;
+                  }
+                }
+                     else {
+                      echo $giverating;
+                    }
+                  ?>
+                </div>
+              </div>
+              <div class="mp-film-opts">
+                <div class="mp-film-opts-hdr">REVIEW</div>
+                <div class="mp-film-opts-item">
+                  <button type="submit" name="review" class="btn btn-dark wl-form-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <span class="material-symbols-outlined mso-icon" id="review-btn">
+                      history_edu
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <div class="mp-film-opts">
+                <div class="mp-film-opts-hdr">WATCHLIST</div>
+                <div class="mp-film-opts-item">
+                  <?php
+                    if (isset($_SESSION["login_email"])){
+                      if (onWatchlist($watchID, $mID)) {
+                        echo $onthelist; 
+                      }else {
+                        echo $notonthelist;
+                      }
+                    } else {
+                      echo $notonthelist;
+                    }
+                  ?>
+                  
+                </div>
+              </div>
             </div>
           </div>
-          <div class="mp-film-opts">
-            <div class="mp-film-opts-hdr">WATCHLIST</div>
-            <div class="mp-film-opts-item">
-              <span class="material-symbols-outlined mp-ms-icon">
-                list_alt_add
-              </span>
-            </div>
+
           </div>
-          <div class="mp-film-opts">
-            <div class="mp-film-opts-hdr">SEENLIST</div>
-            <div class="mp-film-opts-item">
-              <span class="material-symbols-outlined mp-ms-icon">
-                checklist_rtl
-              </span>
-            </div>
-          </div>
-          <div class="mp-film-opts">
-            <div class="mp-film-opts-hdr">REVIEW</div>
-            <div class="mp-film-opts-item">
-              <span class="material-symbols-outlined mp-ms-icon">
-                rate_review
-              </span>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
-  </div>
-</div>
 <div class="backdrop-showcase-mobile" style="background-image: url(<?php echo $backdrop_small; ?>)">
   <div class="film-package">
     <div class="film-cover-image-can"><img class="movie-cover-img" src="<?php echo $poster; ?>" /></div>
@@ -404,6 +495,33 @@ if (isset($_GET["mid"])){
       </div>
     </div>
   
+                <!-- Modal -->
+                <form method="post" action="">
+        <div class="modal fade review-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Write a Review</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <textarea id="modal-review-space" name="review" cols="50" placeholder="How was the movie?"></textarea>
+                <div class="recc-secc">
+                  <p class="rec-ques">Would you recommend?</p>
+                  <input type="radio" class="radio-btns" id="hellya" name="nod" value="1">
+                  <label for="hellya">Yes</label>
+                  <input type="radio" class="radio-btns" id="hellno" name="nod" value="0">
+                  <label for="hellno">No</label>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" name="critic" class="btn btn-dark">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </form>
 </div>
 
 <?php

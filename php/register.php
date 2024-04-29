@@ -54,6 +54,13 @@ if (isset($_POST["register"])) {
         $_SESSION["logged_in"] = true;
         $_SESSION["is_user"] = true;
         $_SESSION["get_user"] = $user;
+        $_SESSION["login_email"] = $register_email;
+        $wl = 'Watchlist';
+        $lt = 'watch';
+        $userID = getUserId($register_email);
+        $query = $db->prepare("Insert Into Lists (u_ID, listName, ltype) Values ( ? , ?, ?)");
+        $query->bind_param('iss', $userID, $wl, $lt);
+        $query->execute();
         header("Location: ./pages/preferrences.php");
     }
 }
