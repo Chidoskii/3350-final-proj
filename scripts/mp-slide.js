@@ -143,5 +143,17 @@ const initSlider = () => {
     handleNewSlideButtons();
   });
 };
+
+function showRateSlider() {
+  const element = document.getElementById('rate-range-can');
+  if (element.classList.contains('hideme')) {
+    element.classList.remove('hideme');
+    element.classList.add('showme');
+  } else {
+    element.classList.remove('showme');
+    element.classList.add('hideme');
+  }
+}
+
 window.addEventListener('resize', initSlider);
 window.addEventListener('load', initSlider);

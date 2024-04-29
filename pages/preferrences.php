@@ -104,7 +104,7 @@ if($_SESSION["logged_in"] == false){
           </form>
           <br>
           <div class="creds-btns-can">
-          <button type="button" class="btn btn-primary creds-form-btns creds-form-confirm ">Sign In</button>
+          <button type="submit" name="Login" class="btn btn-primary creds-form-btns creds-form-confirm ">Sign In</button>
           <button type="button" class="btn btn-secondary creds-form-btns" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
@@ -144,7 +144,7 @@ if($_SESSION["logged_in"] == false){
           </form>
           <br>
           <div class="creds-btns-can">
-          <button type="button" class="btn btn-primary creds-form-btns creds-form-confirm">Resgister</button>
+          <button type="submit" name="register" class="btn btn-primary creds-form-btns creds-form-confirm">Resgister</button>
           <button type="button" class="btn btn-secondary creds-form-btns" data-bs-dismiss="modal">Close</button>
         </div>
         </div>

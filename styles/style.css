@@ -261,12 +261,47 @@ body {
   width: 135px;
 }
 
+.mp-ms-icon {
+  font-size: 24pt;
+}
+
 .mp-film-opts-item {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tmdb-rating {
   font-size: 18pt;
+}
+
+.rate-form-slider {
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto;
+  width: 70%;
+}
+
+.star-form-label {
+  text-align: center;
+}
+
+.stars-mssg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rating-icon {
+  color: goldenrod;
+}
+
+.slider-star {
+  margin: 5px;
+}
+
+.range-output {
+  min-width: 25px;
 }
 
 .mp-section-hdr {
@@ -292,6 +327,23 @@ body {
 
 .embed-vid {
   margin: 5px;
+  border-radius: 5px;
+  box-shadow: 0 3px 3px 3px #222;
+}
+
+.hideme {
+  display: none;
+}
+
+.rate-btn {
+  background-color: #222;
+  align-items: center;
+  border: none;
+  padding-bottom: 0;
+}
+
+.rate-sub-btn {
+  margin: 10px;
 }
 
 /******************************************** Footer styling **********************/

@@ -1,14 +1,6 @@
 <?php
 require_once("../php/config.php");
 
-if(empty($_SESSION["logged_in"])){
-  header("location: ../index.php");
-}
-
-if($_SESSION["logged_in"] == false){
-  header("location: ../index.php");
-}
-
 $mID = "";
 $deets = "";
 $similar = "";
@@ -52,6 +44,7 @@ if (isset($_GET["mid"])){
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,400;0,600;0,700;1,600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../styles/navbar.css">
     <link rel="stylesheet" href="../styles/reel.css">
     <link rel="stylesheet" href="../styles/style.css">
@@ -135,7 +128,7 @@ if (isset($_GET["mid"])){
           </form>
           <br>
           <div class="creds-btns-can">
-          <button type="button" class="btn btn-primary creds-form-btns creds-form-confirm ">Sign In</button>
+          <button type="submit" name="Login" class="btn btn-primary creds-form-btns creds-form-confirm ">Sign In</button>
           <button type="button" class="btn btn-secondary creds-form-btns" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
@@ -175,7 +168,7 @@ if (isset($_GET["mid"])){
           </form>
           <br>
           <div class="creds-btns-can">
-          <button type="button" class="btn btn-primary creds-form-btns creds-form-confirm">Resgister</button>
+          <button type="submit" name="register" class="btn btn-primary creds-form-btns creds-form-confirm">Resgister</button>
           <button type="button" class="btn btn-secondary creds-form-btns" data-bs-dismiss="modal">Close</button>
         </div>
         </div>
@@ -191,18 +184,61 @@ if (isset($_GET["mid"])){
     <div class="mp-film-bd-info">
       <h1 class="mp-film-title"><?php echo $deets['title']; ?></h1>
       <p class="mp-film-desc"><?php echo $deets['overview']; ?></p>
-      <div class="mp-film-opts-can">
-        <div class="mp-film-opts rating">
-          <div class="mp-film-opts-hdr ">TMDB RATING</div>
-          <div class="mp-film-opts-item tmdb-rating"><?php echo number_format($deets['vote_average'], 1); ?>/10</div>
+      <div class="mp-opts-grouping">
+        <div class="rate-form-slider hideme" id="rate-range-can">
+            <label for="rateRange" class="form-label star-form-label">Scale: 0 - 10</label>
+            <div class="stars-mssg">
+            <output class="range-output">0</output>
+            <span class="material-symbols-outlined mp-ms-icon rating-icon slider-star">
+              star_rate
+            </span>
+            <input type="range" class="form-range" min="0" max="10" step="0.1" oninput="this.previousElementSibling.previousElementSibling.value = this.value" id="rateRange" name="rating">
+            <button type="submit" name="myRating" class="btn btn-success rate-sub-btn">
+              <span class="material-symbols-outlined">
+                check_small
+              </span>
+            </button>
+            </div>
         </div>
-        <div class="mp-film-opts">
-          <div class="mp-film-opts-hdr">REVIEW</div>
-          <div class="mp-film-opts-item"></div>
-        </div>
-        <div class="mp-film-opts">
-          <div class="mp-film-opts-hdr">WATCHLIST</div>
-          <div class="mp-film-opts-item"></div>
+        <div class="mp-film-opts-can">
+          <div class="mp-film-opts rating">
+            <div class="mp-film-opts-hdr ">TMDB RATING</div>
+            <div class="mp-film-opts-item tmdb-rating"><?php echo number_format($deets['vote_average'], 1); ?>/10</div>
+          </div>
+          <div class="mp-film-opts rating">
+            <div class="mp-film-opts-hdr">YOUR RATING</div>
+            <div class="mp-film-opts-item">
+            <button onclick="showRateSlider()" class="btn btn-dark rate-btn">
+                <span class="material-symbols-outlined mp-ms-icon rating-icon">
+                  star_rate
+                </span>
+            </button>
+            </div>
+          </div>
+          <div class="mp-film-opts">
+            <div class="mp-film-opts-hdr">WATCHLIST</div>
+            <div class="mp-film-opts-item">
+              <span class="material-symbols-outlined mp-ms-icon">
+                list_alt_add
+              </span>
+            </div>
+          </div>
+          <div class="mp-film-opts">
+            <div class="mp-film-opts-hdr">SEENLIST</div>
+            <div class="mp-film-opts-item">
+              <span class="material-symbols-outlined mp-ms-icon">
+                checklist_rtl
+              </span>
+            </div>
+          </div>
+          <div class="mp-film-opts">
+            <div class="mp-film-opts-hdr">REVIEW</div>
+            <div class="mp-film-opts-item">
+              <span class="material-symbols-outlined mp-ms-icon">
+                rate_review
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

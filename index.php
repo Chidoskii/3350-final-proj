@@ -204,7 +204,7 @@ $base = $config['images']['secure_base_url'] . $config['images']['poster_sizes']
                         <a class="film-title-link" href="./pages/movie.php?mid=$id" rel="noopener noreferrer">
                           <p class="img-reel-film-title">$title</p>
                         </a>
-                        <p class="img-reel-film-genre">Released: $format</p>
+                        <p class="img-reel-film-genre">$format</p>
                       </div>
                       <div class="film-ratings-deets">
                         <p class="img-reel-ratings-title">Rating</p>
