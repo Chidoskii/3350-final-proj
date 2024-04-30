@@ -61,6 +61,11 @@ if (isset($_POST["register"])) {
         $query = $db->prepare("Insert Into Lists (u_ID, listName, ltype) Values ( ? , ?, ?)");
         $query->bind_param('iss', $userID, $wl, $lt);
         $query->execute();
+        $sl = 'Seenlist';
+        $lt = 'seen';
+        $query = $db->prepare("Insert Into Lists (u_ID, listName, ltype) Values ( ? , ?, ?)");
+        $query->bind_param('iss', $userID, $sl, $lt);
+        $query->execute();
         header("Location: ./pages/preferrences.php");
     }
 }

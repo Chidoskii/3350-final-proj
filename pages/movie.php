@@ -4,13 +4,14 @@ require_once("../php/functions.php");
 require_once("../php/login.php");
 require_once("../php/register.php");
 
+$modalPlaceholder = "How was the movie?";
 $giverating =  <<<END
                   <span class="material-symbols-outlined cp-rating-star mso-icon" id="rating-btn" onclick="rateToggle()">
                   star_rate
                   </span>
                   END;
 $onthelist = <<<CONTENT
-                  <form method="post" action="">
+                  <form method="post" class="form-bane" action="">
                     <button type="submit" name="removewatch" class="btn btn-dark wl-form-btn">
                       <span class="material-symbols-outlined mso-icon on-the-list">
                         playlist_add_check
@@ -19,7 +20,7 @@ $onthelist = <<<CONTENT
                   </form>
                   CONTENT;
 $notonthelist = <<<CONTENT
-                  <form method="post" action="">
+                  <form method="post" class="form-bane" action="">
                     <button type="submit" name="watchlist" class="btn btn-dark wl-form-btn"> 
                       <span class="material-symbols-outlined mso-icon" id="watchlist-btn">
                         list_alt_add
@@ -27,10 +28,46 @@ $notonthelist = <<<CONTENT
                     </button>
                   </form>
                   CONTENT;
+$seenit = <<<CONTENT
+                  <form method="post" class="form-bane" action="">
+                    <button type="submit" name="removeseen" class="btn btn-dark wl-form-btn">
+                      <span class="material-symbols-outlined mso-icon on-the-list">
+                        visibility
+                      </span> 
+                    </button>
+                  </form>
+                  CONTENT;
+$didnotseeit = <<<CONTENT
+                  <form method="post" class="form-bane" action="">
+                    <button type="submit" name="seenlist" class="btn btn-dark wl-form-btn"> 
+                      <span class="material-symbols-outlined mso-icon" id="seenlist-btn">
+                        visibility_off
+                      </span>
+                    </button>
+                  </form>
+                  CONTENT;
+$reviewedit = <<<CONTENT
+                    <button type="submit" name="review" class="btn btn-dark wl-form-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      <span class="material-symbols-outlined mso-icon on-the-list" id="review-btn">
+                        history_edu
+                      </span>
+                    </button>
+             
+                  CONTENT;
+$nocomment = <<<CONTENT
+                    <button type="submit" name="review" class="btn btn-dark wl-form-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      <span class="material-symbols-outlined mso-icon" id="review-btn">
+                        history_edu
+                      </span>
+                    </button>
+                  CONTENT;
 
 if (isset($_SESSION["login_email"])){
   $wtf = getUserId($_SESSION["login_email"]);
   $watchID = getWatchlistId($wtf);
+  $seenID = getSeenlistId($wtf);
+  consoleLog($seenID);
+  consoleLog($watchID);
 }
 
 $critic = "";
@@ -61,6 +98,10 @@ if (isset($_GET["mid"])){
     $query->execute();
     $result = $query->get_result();
     $myratings = $result->fetch_all(MYSQLI_ASSOC);
+    $reviewContent = getReviewContent($wtf, $mID);
+    if ($reviewContent != "empty") {
+      $modalPlaceholder = $reviewContent;
+    }
   }
   $deets = getMovieDeets($TMDB_API_KEY, $mID);
   $similar = getSimilarMovies($TMDB_API_KEY, $mID);
@@ -86,26 +127,50 @@ if(isset($_POST['myrate'])) {
 
 if(isset($_POST['watchlist'])) {
   $db = get_mysqli_connection();
-  $query = $db->prepare("INSERT INTO listItems (mID, lID) VALUES (?, ?)");
-  $query->bind_param('ii', $mID, $wtf);
+  $query = $db->prepare("INSERT INTO List_Items (mID, lID) VALUES (?, ?)");
+  $query->bind_param('ii', $mID, $watchID);
   $query->execute();
 }
 
 if(isset($_POST['removewatch'])) {
   $db = get_mysqli_connection();
-  $query = $db->prepare("DELETE FROM listItems where mID = ? and lID = ?");
+  $query = $db->prepare("DELETE FROM List_Items where mID = ? and lID = ?");
   $query->bind_param('ii', $mID, $watchID);
   $query->execute();
 }
 
-if(isset($_POST['critic'])) {
-  $critic = $_POST["review"];
-  $nod = $_POST["nod"];
+if(isset($_POST['removeseen'])) {
   $db = get_mysqli_connection();
-  $query = $db->prepare("INSERT INTO Reviews (u_ID, mID, critique, NOD) VALUES (?,?,?,?)");
-  $query->bind_param('iisi', $wtf, $mID, $critic, $nod);
+  $query = $db->prepare("DELETE FROM List_Items where mID = ? and lID = ?");
+  $query->bind_param('ii', $mID, $seenID);
   $query->execute();
 }
+
+if(isset($_POST['seenlist'])) {
+  $db = get_mysqli_connection();
+  $query = $db->prepare("INSERT INTO List_Items (mID, lID) VALUES (?, ?)");
+  $query->bind_param('ii', $mID, $seenID);
+  $query->execute();
+}
+
+if(isset($_POST['critic'])) {
+  $critic = trim($_POST["review"], " ");
+  if (isset($_POST['nod'])){ 
+    $nod = $_POST["nod"];
+    $db = get_mysqli_connection();
+    $query = $db->prepare("INSERT INTO Reviews (u_ID, mID, critique, NOD) VALUES (?,?,?,?)ON DUPLICATE KEY UPDATE critique = ?, NOD = ?");
+    $query->bind_param('iisisi', $wtf, $mID, $critic, $nod, $critic, $nod);
+    $query->execute();
+  }
+}
+
+$reviewPlaceholder = <<<CONTENT
+                  <textarea id="modal-review-space" name="review" cols="50" placeholder="$modalPlaceholder"></textarea>
+           
+                CONTENT;
+$revision = <<<CONTENT
+                  <textarea id="modal-review-space" name="review" cols="50">$modalPlaceholder</textarea>
+                CONTENT;
 
 ?>
 
@@ -236,12 +301,12 @@ if(isset($_POST['critic'])) {
       </div>
         <div class="creds-form-can">
           <form method="post" action="">
-            <label for="uname" class="form-label creds-label">Username</label><br>
-            <input type="text" id="uname" name="uname" class="form-control creds-input-field"><br>
-            <label for="email" class="form-label creds-label">Email</label><br>
-            <input type="text" id="email" name="email" class="form-control creds-input-field"><br>
-            <label for="psswd" class="form-label creds-label">Password</label><br>
-            <input type="password" id="psswd" name="psswd" class="form-control creds-input-field">
+            <label for="register_user" class="form-label creds-label">Username</label><br>
+            <input type="text" id="register_user" name="register_user" class="form-control creds-input-field"><br>
+            <label for="register_email" class="form-label creds-label">Email</label><br>
+            <input type="text" id="register_email" name="register_email" class="form-control creds-input-field"><br>
+            <label for="register_password" class="form-label creds-label">Password</label><br>
+            <input type="password" id="register_password" name="register_password" class="form-control creds-input-field">
           <br>
           <div class="creds-btns-can">
             <button type="submit" name="register" class="btn btn-primary creds-form-btns creds-form-confirm">Resgister</button>
@@ -305,11 +370,34 @@ if(isset($_POST['critic'])) {
               <div class="mp-film-opts">
                 <div class="mp-film-opts-hdr">REVIEW</div>
                 <div class="mp-film-opts-item">
-                  <button type="submit" name="review" class="btn btn-dark wl-form-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <span class="material-symbols-outlined mso-icon" id="review-btn">
-                      history_edu
-                    </span>
-                  </button>
+                  <?php
+                      if (isset($_SESSION["login_email"])){
+                        if (isReviewed($wtf, $mID)) {
+                          echo $reviewedit; 
+                        }else {
+                          echo $nocomment;
+                        }
+                      } else {
+                        echo $nocomment;
+                      }
+                    ?>
+                </div>
+              </div>
+              <div class="mp-film-opts">
+                <div class="mp-film-opts-hdr">SEENLIST</div>
+                <div class="mp-film-opts-item">
+                  <?php
+                    if (isset($_SESSION["login_email"])){
+                      if (onSeenlist($seenID, $mID)) {
+                        echo $seenit; 
+                      }else {
+                        echo $didnotseeit;
+                      }
+                    } else {
+                      echo $didnotseeit;
+                    }
+                  ?>
+                  
                 </div>
               </div>
               <div class="mp-film-opts">
@@ -505,7 +593,13 @@ if(isset($_POST['critic'])) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <textarea id="modal-review-space" name="review" cols="50" placeholder="How was the movie?"></textarea>
+                <?php
+                  if (isReviewed($wtf, $mID)){
+                    echo $revision;
+                  } else {
+                    echo $reviewPlaceholder;
+                  }
+                ?>
                 <div class="recc-secc">
                   <p class="rec-ques">Would you recommend?</p>
                   <input type="radio" class="radio-btns" id="hellya" name="nod" value="1">

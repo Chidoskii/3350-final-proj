@@ -455,7 +455,15 @@ footer {
   .cheeky-hook {
     font-size: 11pt;
   }
+}
 
+@media screen and (min-width: 750px) {
+  .film-package {
+    padding: 125px 0 100px 60px;
+  }
+}
+
+@media screen and (max-width: 800px) {
   .backdrop-showcase {
     display: none;
   }
@@ -481,15 +489,16 @@ footer {
   }
 }
 
-@media screen and (min-width: 750px) {
-  .film-package {
-    padding: 125px 0 100px 60px;
-  }
-}
-
 @media screen and (min-width: 1050px) {
   .film-package {
     padding-left: 100px;
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .mp-film-opts-can {
+    padding: 0;
+    justify-content: space-around;
   }
 }
 
