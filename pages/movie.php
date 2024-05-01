@@ -87,6 +87,7 @@ $backdrop_base_small = $config['images']['secure_base_url'] . $config['images'][
 $poster = "";
 $backdrop = "";
 $backdrop_small = "";
+$rateColor = "rgb(240, 240, 240)";
 
 
 if (isset($_GET["mid"])){
@@ -115,8 +116,8 @@ if (isset($_GET["mid"])){
 if(isset($_POST['myrate'])) {
   $myrating = number_format($_POST["rating"],1);
   $db = get_mysqli_connection();
-  $query = $db->prepare("INSERT INTO Ratings (mID, uID, rating) VALUES (?, ?, ?)");
-  $query->bind_param('iid', $mID, $wtf, $myrating);
+  $query = $db->prepare("INSERT INTO Ratings (mID, uID, rating) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE rating = ?");
+  $query->bind_param('iidd', $mID, $wtf, $myrating, $myrating);
   $query->execute();
   $query = $db->prepare("SELECT * FROM Ratings WHERE mID = ? and uID = ?");
   $query->bind_param("ii", $mID, $wtf);
@@ -158,7 +159,7 @@ if(isset($_POST['critic'])) {
   if (isset($_POST['nod'])){ 
     $nod = $_POST["nod"];
     $db = get_mysqli_connection();
-    $query = $db->prepare("INSERT INTO Reviews (u_ID, mID, critique, NOD) VALUES (?,?,?,?)ON DUPLICATE KEY UPDATE critique = ?, NOD = ?");
+    $query = $db->prepare("INSERT INTO Reviews (u_ID, mID, critique, NOD) VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE critique = ?, NOD = ?");
     $query->bind_param('iisisi', $wtf, $mID, $critic, $nod, $critic, $nod);
     $query->execute();
   }
@@ -185,7 +186,7 @@ $revision = <<<CONTENT
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,400;0,600;0,700;1,600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" />
     <link rel="stylesheet" href="../styles/navbar.css">
     <link rel="stylesheet" href="../styles/reel.css">
     <link rel="stylesheet" href="../styles/movie.css">
@@ -355,7 +356,9 @@ $revision = <<<CONTENT
                 <?php
                 if (isset($_SESSION["login_email"])){
                   if (count($myratings) > 0) {
+                    echo "<div onclick='rateToggle()'>";
                     echo number_format($myratings[0]['rating'], 1) . "/10"; 
+                    echo "</div>";
                   }
                   else {
                     echo $giverating;
@@ -482,6 +485,17 @@ $revision = <<<CONTENT
                   $img = $poster_base . $value['profile_path'];
                   $fame = number_format($value['popularity'],1);
 
+                  if ($fame > 99) {
+                    $rateColor = "#93FFCD";
+                  }
+                  if ($fame < 99) {
+                    $rateColor = "#FFE38E";
+                  }
+                  if ($fame < 35) {
+                    $rateColor = "#9FFBBB9";
+                  }
+                 
+
                   if ($img == $poster_base) {
                     $img = $filler;
                   }
@@ -499,7 +513,7 @@ $revision = <<<CONTENT
                       <div class="film-ratings-deets">
                         <p class="img-reel-ratings-title">Fame</p>
                         <div class="img-reel-rating-can">
-                          <p class="img-reel-ratings">$fame</p>
+                          <p class="img-reel-ratings" style="background-color:$rateColor;">$fame</p>
                         </div>
                       </div>
                     </div>
@@ -543,6 +557,20 @@ $revision = <<<CONTENT
                   $img = $poster_base . $value['poster_path'];
                   $rating = number_format($value['vote_average'],1);
 
+
+                  if ($rating > 7.4) {
+                    $rateColor = "#93FFCD";
+                  }
+                  if ($rating < 7.5) {
+                    $rateColor = "#FFE38E";
+                  }
+                  if ($rating < 5.6) {
+                    $rateColor = "#9FFBBB9";
+                  }
+                  if ($rating == 0.0) {
+                    $rateColor = "rgb(240, 240, 240)";
+                  }
+
                   if ($img == $poster_base) {
                     $img = $filler2;
                   }
@@ -560,7 +588,7 @@ $revision = <<<CONTENT
                       <div class="film-ratings-deets">
                         <p class="img-reel-ratings-title">Rating</p>
                         <div class="img-reel-rating-can">
-                          <p class="img-reel-ratings">$rating</p>
+                          <p class="img-reel-ratings" style="background-color:$rateColor;">$rating</p>
                         </div>
                       </div>
                     </div>
@@ -594,19 +622,38 @@ $revision = <<<CONTENT
               </div>
               <div class="modal-body">
                 <?php
+                if (isset($_SESSION["login_email"])){
                   if (isReviewed($wtf, $mID)){
                     echo $revision;
                   } else {
                     echo $reviewPlaceholder;
                   }
+                  $card = <<<BODY
+                            <div class="recc-secc">
+                            <p class="rec-ques">Would you recommend?</p>
+                            <input type="radio" class="radio-btns" id="hellya" name="nod" value="1">
+                            <label for="hellya">Yes</label>
+                            <input type="radio" class="radio-btns" id="hellno" name="nod" value="0">
+                            <label for="hellno">No</label>
+                          </div>
+                          BODY;
+
+                          echo $card;
+
+                } else {
+                  $card = <<<BODY
+                            <div class="">
+                            You need to login or create an account.
+                            <br>
+                            <br>
+                            <button type="button" class="btn register-btn" data-bs-toggle="modal" data-bs-target="#signinModal">LOGIN</button>
+                            </div>
+                          BODY;
+
+                          echo $card;
+                }
                 ?>
-                <div class="recc-secc">
-                  <p class="rec-ques">Would you recommend?</p>
-                  <input type="radio" class="radio-btns" id="hellya" name="nod" value="1">
-                  <label for="hellya">Yes</label>
-                  <input type="radio" class="radio-btns" id="hellno" name="nod" value="0">
-                  <label for="hellno">No</label>
-                </div>
+                
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -155,6 +155,7 @@
 
 .mso-icon {
   font-size: 24pt;
+  max-width: 95px;
 }
 
 .mso-icon:hover {

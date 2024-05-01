@@ -8,6 +8,7 @@ $upcoming = getUpcomingFilms();
 $playing = getNowPlaying();
 $filler = "./imgs/mona.jpg";
 $base = $config['images']['secure_base_url'] . $config['images']['poster_sizes'][4];
+$rateColor = "rgb(240, 240, 240)";
 
 ?>
 
@@ -192,6 +193,19 @@ $base = $config['images']['secure_base_url'] . $config['images']['poster_sizes']
                   $img = $base . $value['poster_path'];
                   $rating = number_format($value['vote_average'],1);
 
+                  if ($rating > 7.4) {
+                    $rateColor = "#93FFCD";
+                  }
+                  if ($rating < 7.5) {
+                    $rateColor = "#FFE38E";
+                  }
+                  if ($rating < 5.6) {
+                    $rateColor = "#9FFBBB9";
+                  }
+                  if ($rating == 0.0) {
+                    $rateColor = "rgb(240, 240, 240)";
+                  }
+
                   if ($img == $base) {
                     $img = $filler;
                   }
@@ -209,7 +223,7 @@ $base = $config['images']['secure_base_url'] . $config['images']['poster_sizes']
                       <div class="film-ratings-deets">
                         <p class="img-reel-ratings-title">Rating</p>
                         <div class="img-reel-rating-can">
-                          <p class="img-reel-ratings">$rating</p>
+                          <p class="img-reel-ratings" style="background-color:$rateColor;">$rating</p>
                         </div>
                       </div>
                     </div>
@@ -253,6 +267,19 @@ $base = $config['images']['secure_base_url'] . $config['images']['poster_sizes']
                   $img = $base . $value['poster_path'];
                   $rating = number_format($value['vote_average'],1);
 
+                  if ($rating > 7.4) {
+                    $rateColor = "#93FFCD";
+                  }
+                  if ($rating < 7.5) {
+                    $rateColor = "#FFE38E";
+                  }
+                  if ($rating < 5.6) {
+                    $rateColor = "#9FFBBB9";
+                  }
+                  if ($rating == 0.0) {
+                    $rateColor = "rgb(240, 240, 240)";
+                  }
+
                   if ($img == $base) {
                     $img = $filler;
                   }
@@ -270,7 +297,7 @@ $base = $config['images']['secure_base_url'] . $config['images']['poster_sizes']
                       <div class="film-ratings-deets">
                         <p class="img-reel-ratings-title">Rating</p>
                         <div class="img-reel-rating-can">
-                          <p class="img-reel-ratings">$rating</p>
+                          <p class="img-reel-ratings" style="background-color:$rateColor;">$rating</p>
                         </div>
                       </div>
                     </div>

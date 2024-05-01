@@ -263,6 +263,7 @@ body {
 
 .mp-ms-icon {
   font-size: 24pt;
+  max-width: 95px;
 }
 
 .mp-film-opts-item {
