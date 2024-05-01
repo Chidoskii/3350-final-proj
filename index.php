@@ -18,6 +18,7 @@ $rateColor = "rgb(240, 240, 240)";
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="TheMovieBuffs is a website where users can write reviews and give ratings on films they have watched.">
     <title><?= $PROJECT_NAME ?> | Movie Reviews and Ratings</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +28,13 @@ $rateColor = "rgb(240, 240, 240)";
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/reel.css">
     <link rel="shortcut icon" href="../imgs/favicon.ico" />
+    <meta name="theme-color" content="#222" />
+    <meta
+      name="keywords"
+      content="TheMovieBuffs, Moviebuffs, Movie Buffs, Rate, Review, BuffScore"
+    />
+    <link rel="apple-touch-icon" href="./imgs/tmb-192x192.png" />
+    <link rel="manifest" href="manifest.json" />
     <script src="./scripts/validate.js"></script>
 </head>
 <body>
