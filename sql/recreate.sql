@@ -70,3 +70,12 @@ CREATE TABLE Ratings (
     PRIMARY KEY (uID, mID),
     FOREIGN KEY (uID) REFERENCES User(userID)
 );
+
+CREATE TABLE ProfileChanges(
+    uID INT NOT NULL,
+    changeType VARCHAR(255),
+    oldValue TEXT,
+    newValue TEXT,
+    changeDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (uID) REFERENCES User(userID)
+);
