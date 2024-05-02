@@ -228,7 +228,7 @@ switch($dropdown)
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => [
-                "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NWVmNTIxOGZhOTRiMzE5NjA1MGY0OGM3ZTYxZjdhNiIsInN1YiI6IjY2MjgwZmVmZTI5NWI0MDE4NzlkMWI4MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.6sLEniSyAV0TUUzaYm-dZlBOt6GnsNWv5iNV2z1sNss",
+                "Authorization: Bearer YOUR_API_KEY_HERE",
                 "accept: application/json"
             ],
             ]);
@@ -274,7 +274,7 @@ switch($dropdown)
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => [
-                "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NWVmNTIxOGZhOTRiMzE5NjA1MGY0OGM3ZTYxZjdhNiIsInN1YiI6IjY2MjgwZmVmZTI5NWI0MDE4NzlkMWI4MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.6sLEniSyAV0TUUzaYm-dZlBOt6GnsNWv5iNV2z1sNss",
+                "Authorization: Bearer YOUR_API_KEY_HERE",
                 "accept: application/json"
             ],
             ]);
@@ -306,7 +306,7 @@ switch($dropdown)
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => [
-                "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NWVmNTIxOGZhOTRiMzE5NjA1MGY0OGM3ZTYxZjdhNiIsInN1YiI6IjY2MjgwZmVmZTI5NWI0MDE4NzlkMWI4MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.6sLEniSyAV0TUUzaYm-dZlBOt6GnsNWv5iNV2z1sNss",
+                "Authorization: Bearer YOUR_API_KEY_HERE",
                 "accept: application/json"
             ],
             ]);
@@ -338,7 +338,7 @@ switch($dropdown)
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => [
-                "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NWVmNTIxOGZhOTRiMzE5NjA1MGY0OGM3ZTYxZjdhNiIsInN1YiI6IjY2MjgwZmVmZTI5NWI0MDE4NzlkMWI4MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.6sLEniSyAV0TUUzaYm-dZlBOt6GnsNWv5iNV2z1sNss",
+                "Authorization: Bearer YOUR_API_KEY_HERE",
                 "accept: application/json"
             ],
             ]);
