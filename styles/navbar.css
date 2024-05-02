@@ -23,7 +23,8 @@ a:active {
   font-style: normal;
 }
 
-.nav-item {
+.navbar-greeting {
+  color: gainsboro;
   margin: 0 15px;
 }
 
@@ -37,6 +38,11 @@ a:active {
 .navbar-nav {
   font-size: 14pt;
   margin-right: 15px;
+}
+
+.dropdown-menu[data-bs-popper] {
+  left: -50px;
+  background-color: #222;
 }
 
 .topnav-search-box-can {

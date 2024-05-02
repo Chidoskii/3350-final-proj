@@ -1,0 +1,139 @@
+.ratelist-card {
+  width: 31%;
+  margin: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 7px;
+  box-shadow: #222 0px 0px 5px;
+}
+
+.rate-info {
+  display: flex;
+  width: 75%;
+}
+
+.rate-title-rating-can {
+  display: flex;
+  height: 150px;
+  width: 100%;
+  border-right: #222 1px solid;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.rate-img-cover {
+  height: 150px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.myratings-can {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 50px auto;
+}
+
+.tmdb-your-rate-can {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.your-rating-can {
+  border: #222 1px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+  width: 35%;
+}
+
+.ratings-header {
+  height: 24px;
+  width: 100%;
+  text-align: center;
+  border-bottom: #222 1px solid;
+}
+
+.ratings-score {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25pt;
+  width: 100%;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.rate-title-can {
+  font-size: 14pt;
+  font-weight: 500;
+  text-decoration: underline;
+  text-align: center;
+}
+
+.rate-img {
+  background-color: #222;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.my-reviews-can {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.review-card {
+  display: flex;
+  padding: 7px;
+  flex-direction: column;
+  justify-content: space-around;
+  box-shadow: #222 0px 0px 5px;
+  border-radius: 10px;
+  margin: 50px 0;
+  flex-wrap: wrap;
+  width: 45%;
+}
+
+.review-card-film-info {
+  display: flex;
+  padding: 5px;
+  border-bottom: #222 1px solid;
+}
+
+.review-img-cvr {
+  height: 100px;
+}
+
+.review-card-meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  width: 88%;
+}
+
+.review-card-film-title {
+  font-size: 20pt;
+  font-weight: 500;
+}
+
+.review-card-review-date {
+  font-size: 10pt;
+  text-align: right;
+}
+
+.review-img-cvr {
+  border: #222 1px solid;
+  border-radius: 5px;
+  box-shadow: #222 3px 3px 3px;
+}
+
+.review-card-film-critique {
+  padding: 25px 15px;
+}

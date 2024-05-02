@@ -32,38 +32,6 @@ function closeOffcanvas() {
   backdrop.classList.remove('show');
 }
 
-// Function to register User
-function registerUser() {
-  //alert('wOrKs'); //Call test
-  let uname = document.getElementById('uname').value;
-  let email = document.getElementById('email').value;
-  let psswd = document.getElementById('psswd').value;
-  /*if (!uname || !email || !psswd) {
-    alert(psswd);
-    alert("Empty String");
-  }
-  else {*/
-  //Makes an object to send
-  let formData = new FormData();
-
-  formData.append('register_user', uname);
-  formData.append('register_email', email);
-  formData.append('register_password', psswd);
-
-  fetch('../pages/register.php', {
-    method: 'POST',
-    body: formData,
-  })
-    .then((response) => response.text()) // Sends object (Will request updating to JSON for security reasons)
-    .then((data) => console.log(data))
-    .catch((error) => console.error('Error: ', error));
-  //}
-}
-
-function loginUser() {
-  //alert(''); //Call test
-}
-
 // WAIT FOR THE PAGE TO LOAD BEFORE ADDING LISTENERS
 window.addEventListener('load', function () {
   document
@@ -81,14 +49,4 @@ window.addEventListener('load', function () {
   document
     .getElementById('cancel-pass-btn')
     .addEventListener('click', hidePassForm);
-
-  document
-    .getElementById('registerModal')
-    .querySelector('.creds-form-confirm')
-    .addEventListener('click', registerUser);
-
-  document
-    .getElementById('signinModal')
-    .querySelector('.creds-form-confirm')
-    .addEventListener('click', loginUser);
 });

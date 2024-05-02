@@ -33,8 +33,8 @@ $rateColor = "rgb(240, 240, 240)";
       name="keywords"
       content="TheMovieBuffs, Moviebuffs, Movie Buffs, Rate, Review, BuffScore"
     />
-    <link rel="apple-touch-icon" href="./imgs/tmb-192x192.png" />
-    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="./mani/tmb-192x192.png" />
+    <link rel="manifest" href="./mani/manifest.json" />
     <script src="./scripts/validate.js"></script>
 </head>
 <body>
@@ -72,12 +72,14 @@ $rateColor = "rgb(240, 240, 240)";
           echo '<button type="button" class="btn register-btn" data-bs-toggle="modal" data-bs-target="#signinModal">LOGIN</button>';
         } 
         else {
+          echo "<div class='navbar-greeting'>Hello, " . $_SESSION["get_user"]['username'] . "</div>";
           echo '<li class="nav-item dropdown user-drop">
                   <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <img alt="user" src="./imgs/user-circle.png" class="user-logo"/>
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="./pages/preferrences.php">MyProfile Settings</a></li>
+                    <li><a class="dropdown-item" href="./pages/preferrences.php">Profile</a></li>
+                    <li><a class="dropdown-item" href="./pages/lists.php">Lists</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="./php/logout.php">LOGOUT </a></li>
                   </ul>

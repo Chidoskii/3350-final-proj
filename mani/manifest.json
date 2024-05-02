@@ -1,7 +1,7 @@
 {
   "name": "TheMovieBuffs",
   "short_name": "TMB",
-  "start_url": ".",
+  "start_url": "../index.php",
   "display": "standalone",
   "background_color": "#222",
   "description": "TheMovieBuffs is a website where users can write reviews and give ratings on films they have watched.",

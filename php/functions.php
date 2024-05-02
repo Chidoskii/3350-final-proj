@@ -132,6 +132,74 @@ function isReviewed($id, $mid) {
     return $outcome;
 }
 
+function getReviewedMovies($id) {
+    $db = get_mysqli_connection();
+    $query = $db->prepare("SELECT * FROM Reviews  WHERE u_ID = ?");
+    $query->bind_param("i", $id);
+    $query->execute();
+    $result = $query->get_result();
+    $results = $result->fetch_all(MYSQLI_ASSOC);
+
+    return $results;
+}
+
+function getRatedMovies($id) {
+    $db = get_mysqli_connection();
+    $query = $db->prepare("SELECT * FROM Ratings  WHERE uID = ?");
+    $query->bind_param("i", $id);
+    $query->execute();
+    $result = $query->get_result();
+    $results = $result->fetch_all(MYSQLI_ASSOC);
+
+    return $results;
+}
+
+function getWatchlistMovies($id) {
+    $watchID = getWatchlistId($id);
+    $db = get_mysqli_connection();
+    $query = $db->prepare("SELECT * FROM List_Items  WHERE lID = ?");
+    $query->bind_param("i", $watchID);
+    $query->execute();
+    $result = $query->get_result();
+    $results = $result->fetch_all(MYSQLI_ASSOC);
+
+    return $results;
+}
+
+function getSeenlistMovies($id) {
+    $seenID = getSeenlistId($id);
+    $db = get_mysqli_connection();
+    $query = $db->prepare("SELECT * FROM List_Items  WHERE lID = ?");
+    $query->bind_param("i", $seenID);
+    $query->execute();
+    $result = $query->get_result();
+    $results = $result->fetch_all(MYSQLI_ASSOC);
+
+    return $results;
+}
+
+function getMyRate($id, $mid) {
+    $db = get_mysqli_connection();
+    $query = $db->prepare("SELECT * FROM Ratings WHERE uID = ? and mID = ?");
+    $query->bind_param("ii", $id, $mid);
+    $query->execute();
+    $result = $query->get_result();
+    $results = $result->fetch_all(MYSQLI_ASSOC);
+
+    return $results[0]['rating'];
+}
+
+function getMyReview($id, $mid) {
+    $db = get_mysqli_connection();
+    $query = $db->prepare("SELECT * FROM Reviews WHERE u_ID = ? and mID = ?");
+    $query->bind_param("ii", $id, $mid);
+    $query->execute();
+    $result = $query->get_result();
+    $results = $result->fetch_all(MYSQLI_ASSOC);
+
+    return $results[0]['critique'];
+}
+
 /*-----------------------------------------------GENERAL-----------------------------------------------*/
 function consoleLog($data) {
     $output = $data;

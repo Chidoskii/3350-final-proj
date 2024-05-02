@@ -346,6 +346,75 @@ body {
 .rate-sub-btn {
   margin: 10px;
 }
+/******************************************** LIST PAGE ****************************/
+.lp-can {
+  padding-top: 100px;
+}
+
+.lp-section-hdr {
+  font-family: 'Orbitron', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-size: 22pt;
+  font-style: normal;
+}
+
+.lp-watchlist-can {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 25px 0;
+}
+
+.watchlist-img-link {
+  width: 15%;
+  padding: 10px;
+  min-width: 55px;
+}
+
+.watchlist-card {
+  box-shadow: #333 0 0 5px;
+  background-color: gainsboro;
+  border-radius: 15px;
+  margin: 15px 7px;
+  display: flex;
+  width: 31%;
+}
+
+.wl-img-cover {
+  width: 100%;
+  border-radius: 3px;
+}
+
+.wl-film-info {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wl-film-rate {
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.wl-film-title {
+  padding: 5px;
+}
+
+.cl-coming-soon {
+  display: flex;
+  margin: 100px;
+  font-family: 'Orbitron', sans-serif;
+  font-optical-sizing: auto;
+  min-height: 300px;
+  font-size: 22pt;
+  font-style: normal;
+  border: gainsboro 5px dashed;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+}
 
 /******************************************** Footer styling **********************/
 footer {

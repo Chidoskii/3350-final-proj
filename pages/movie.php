@@ -128,8 +128,8 @@ if(isset($_POST['myrate'])) {
 
 if(isset($_POST['watchlist'])) {
   $db = get_mysqli_connection();
-  $query = $db->prepare("INSERT INTO List_Items (mID, lID) VALUES (?, ?)");
-  $query->bind_param('ii', $mID, $watchID);
+  $query = $db->prepare("INSERT INTO List_Items (mID, lID) VALUES (?, ?) ON DUPLICATE KEY UPDATE mID = ?");
+  $query->bind_param('iii', $mID, $watchID, $mID);
   $query->execute();
 }
 
@@ -149,8 +149,8 @@ if(isset($_POST['removeseen'])) {
 
 if(isset($_POST['seenlist'])) {
   $db = get_mysqli_connection();
-  $query = $db->prepare("INSERT INTO List_Items (mID, lID) VALUES (?, ?)");
-  $query->bind_param('ii', $mID, $seenID);
+  $query = $db->prepare("INSERT INTO List_Items (mID, lID) VALUES (?, ?) ON DUPLICATE KEY UPDATE mID = ?");
+  $query->bind_param('iii', $mID, $seenID, $mID);
   $query->execute();
 }
 
@@ -193,7 +193,7 @@ $revision = <<<CONTENT
     <link rel="stylesheet" href="../styles/movie.css">
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="shortcut icon" href="../../imgs/favicon.ico" />
-    <link rel="manifest" href="../manifest.json" />
+    <link rel="manifest" href="../mani/manifest.json" />
 </head>
 <body>
 <nav class="topnav navbar bg-dark fixed-top navbar-expand-lg bg-body-tertiary border-bottom border-body" data-bs-theme="dark">
@@ -205,7 +205,7 @@ $revision = <<<CONTENT
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
+          <a class="nav-link" aria-current="page" href="../index.php">Home</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -230,12 +230,14 @@ $revision = <<<CONTENT
           echo '<button type="button" class="btn register-btn" data-bs-toggle="modal" data-bs-target="#signinModal">LOGIN</button>';
         } 
         else {
+          echo "<div class='navbar-greeting'>Hello, " . $_SESSION["get_user"]['username'] . "</div>";
           echo '<li class="nav-item dropdown user-drop">
                   <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <img alt="user" src="../imgs/user-circle.png" class="user-logo"/>
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="./preferrences.php">MyProfile Settings</a></li>
+                    <li><a class="dropdown-item" href="./preferrences.php">Profile</a></li>
+                    <li><a class="dropdown-item" href="./lists.php">Lists</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="../php/logout.php">LOGOUT </a></li>
                   </ul>
@@ -494,7 +496,7 @@ $revision = <<<CONTENT
                     $rateColor = "#FFE38E";
                   }
                   if ($fame < 35) {
-                    $rateColor = "#9FFBBB9";
+                    $rateColor = "#FFBBB9";
                   }
                  
 
