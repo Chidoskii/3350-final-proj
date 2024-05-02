@@ -36,6 +36,7 @@ $rateColor = "rgb(240, 240, 240)";
     <link rel="apple-touch-icon" href="./imgs/tmb-192x192.png" />
     <link rel="manifest" href="manifest.json" />
     <script src="./scripts/validate.js"></script>
+    <script src="./scripts/dropdown.js"></script>
 </head>
 <body>
 <nav class="topnav navbar bg-dark fixed-top navbar-expand-lg bg-body-tertiary border-bottom border-body" data-bs-theme="dark">
