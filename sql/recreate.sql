@@ -70,3 +70,22 @@ CREATE TABLE Ratings (
     PRIMARY KEY (uID, mID),
     FOREIGN KEY (uID) REFERENCES User(userID)
 );
+
+CREATE TABLE ProfileChanges(
+    uID INT NOT NULL,
+    changeType VARCHAR(255),
+    oldValue TEXT,
+    newValue TEXT,
+    changeDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (uID) REFERENCES User(userID)
+);
+
+CREATE TABLE ProfileHistory (
+    uID INT NOT NULL,
+    deletedUsername VARCHAR(255),
+    deletedfname VARCHAR(255) DEFAULT NULL,
+    deletedlname VARCHAR(255) DEFAULT NULL,
+    delteddob DATE DEFAULT NULL,
+    deleteDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (uID) REFERENCES User(userID)
+);

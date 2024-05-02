@@ -48,56 +48,17 @@ BEGIN
         SET newValue = NEW.avatar;
     END IF;
 
-    INSERT INTO ProfileChanges (userID, changeType, oldValue, newValue, changeDate)
-    VALUES (NEW.userID, changeType, oldValue, newValue, NOW());
+    INSERT INTO ProfileChanges (uID, changeType, oldValue, newValue, changeDate)
+    VALUES (changeType, oldValue, newValue, NOW());
 END//
     
-END//
-
 --Delete profile 
 CREATE TRIGGER DeleteUserTrigger
-AFTER DELETE ON User
+BEFORE DELETE ON User
 FOR EACH ROW
 BEGIN
-    INSERT INTO ProfileHistory (userID, deletedUsername, deleteDate)
-    VALUES (OLD.userID, OLD.username, NOW());
+    INSERT INTO ProfileHistory (uID, deletedUsername, deletedfname, deletedlname, deleteddob, deleteDate)
+    VALUES (OLD.userID, OLD.username, OLD.fname, OLD.lname, OLD.dob, NOW());
 END//
-
---UPDATE RATING 
-CREATE TRIGGER UpdateRatingTrigger
-AFTER INSERT ON Review
-FOR EACH ROW
-BEGIN
-    DECLARE total_ratings DECIMAL;
-    DECLARE total_reviews INT;
-    DECLARE new_avg_rating DECIMAL;
-
-    -- total ratings and # of reviews movie
-    SELECT SUM(rating), COUNT(*) INTO total_ratings, total_reviews
-    FROM Review
-    WHERE mID = NEW.mID;
-
-    -- Update avg movie rating
-    IF total_reviews > 0 THEN
-        SET new_avg_rating = total_ratings / total_reviews;
-    ELSE
-        SET new_avg_rating = NULL;
-    END IF;
-
-    UPDATE Movie
-    SET ovr = new_avg_rating
-    WHERE movie_ID = NEW.mID;
-END//
-
---Followers count 
-CREATE TRIGGER FollowersCountTrigger
-AFTER INSERT ON Followers
-FOR EACH ROW
-BEGIN
-    UPDATE User
-    SET followers_count = followers_count + 1
-    WHERE userID = NEW.u_ID;
-END//
-
 
 DELIMITER; 
