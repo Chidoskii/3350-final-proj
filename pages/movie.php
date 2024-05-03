@@ -66,8 +66,6 @@ if (isset($_SESSION["login_email"])){
   $wtf = getUserId($_SESSION["login_email"]);
   $watchID = getWatchlistId($wtf);
   $seenID = getSeenlistId($wtf);
-  consoleLog($seenID);
-  consoleLog($watchID);
 }
 
 $critic = "";
@@ -239,7 +237,7 @@ $revision = <<<CONTENT
                     <li><a class="dropdown-item" href="./preferrences.php">Profile</a></li>
                     <li><a class="dropdown-item" href="./lists.php">Lists</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="../php/logout.php">LOGOUT </a></li>
+                    <li><a class="dropdown-item ddi-logout" href="../php/logout.php">LOGOUT </a></li>
                   </ul>
                 </li>';
         }

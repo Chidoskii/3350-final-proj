@@ -40,6 +40,10 @@ a:active {
   margin-right: 15px;
 }
 
+.ddi-logout {
+  text-align: center;
+}
+
 .dropdown-menu[data-bs-popper] {
   left: -50px;
   background-color: #222;

@@ -88,7 +88,7 @@ $rateColor = "rgb(240, 240, 240)";
                     <li><a class="dropdown-item" href="./preferrences.php">Profile</a></li>
                     <li><a class="dropdown-item" href="#">Lists</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="../php/logout.php">LOGOUT </a></li>
+                    <li><a class="dropdown-item ddi-logout" href="../php/logout.php">LOGOUT </a></li>
                   </ul>
                 </li>';
         }
