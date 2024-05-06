@@ -41,6 +41,7 @@ $rateColor = "rgb(240, 240, 240)";
     <link rel="stylesheet" href="../styles/navbar.css">
     <link rel="stylesheet" href="../styles/reel.css">
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
     <link rel="shortcut icon" href="../../imgs/favicon.ico" />
     <link rel="manifest" href="../mani/manifest.json" />
 </head>

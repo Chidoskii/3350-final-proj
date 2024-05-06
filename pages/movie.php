@@ -10,6 +10,11 @@ $giverating =  <<<END
                   star_rate
                   </span>
                   END;
+$mgiverating =  <<<END
+                  <span class="material-symbols-outlined cp-rating-star mso-icon" id="rating-btn" onclick="rateToggler()">
+                  star_rate
+                  </span>
+                  END;
 $onthelist = <<<CONTENT
                   <form method="post" class="form-bane" action="">
                     <button type="submit" name="removewatch" class="btn btn-dark wl-form-btn">
@@ -111,55 +116,57 @@ if (isset($_GET["mid"])){
   $backdrop_small =  $backdrop_base_small . $deets['backdrop_path'];
 }
 
-if(isset($_POST['myrate'])) {
-  $myrating = number_format($_POST["rating"],1);
-  $db = get_mysqli_connection();
-  $query = $db->prepare("INSERT INTO Ratings (mID, uID, rating) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE rating = ?");
-  $query->bind_param('iidd', $mID, $wtf, $myrating, $myrating);
-  $query->execute();
-  $query = $db->prepare("SELECT * FROM Ratings WHERE mID = ? and uID = ?");
-  $query->bind_param("ii", $mID, $wtf);
-  $query->execute();
-  $result = $query->get_result();
-  $myratings = $result->fetch_all(MYSQLI_ASSOC);
-}
-
-if(isset($_POST['watchlist'])) {
-  $db = get_mysqli_connection();
-  $query = $db->prepare("INSERT INTO List_Items (mID, lID) VALUES (?, ?) ON DUPLICATE KEY UPDATE mID = ?");
-  $query->bind_param('iii', $mID, $watchID, $mID);
-  $query->execute();
-}
-
-if(isset($_POST['removewatch'])) {
-  $db = get_mysqli_connection();
-  $query = $db->prepare("DELETE FROM List_Items where mID = ? and lID = ?");
-  $query->bind_param('ii', $mID, $watchID);
-  $query->execute();
-}
-
-if(isset($_POST['removeseen'])) {
-  $db = get_mysqli_connection();
-  $query = $db->prepare("DELETE FROM List_Items where mID = ? and lID = ?");
-  $query->bind_param('ii', $mID, $seenID);
-  $query->execute();
-}
-
-if(isset($_POST['seenlist'])) {
-  $db = get_mysqli_connection();
-  $query = $db->prepare("INSERT INTO List_Items (mID, lID) VALUES (?, ?) ON DUPLICATE KEY UPDATE mID = ?");
-  $query->bind_param('iii', $mID, $seenID, $mID);
-  $query->execute();
-}
-
-if(isset($_POST['critic'])) {
-  $critic = trim($_POST["review"], " ");
-  if (isset($_POST['nod'])){ 
-    $nod = $_POST["nod"];
+if (isset($_SESSION["login_email"])){
+  if(isset($_POST['myrate'])) {
+    $myrating = number_format($_POST["rating"],1);
     $db = get_mysqli_connection();
-    $query = $db->prepare("INSERT INTO Reviews (u_ID, mID, critique, NOD) VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE critique = ?, NOD = ?");
-    $query->bind_param('iisisi', $wtf, $mID, $critic, $nod, $critic, $nod);
+    $query = $db->prepare("INSERT INTO Ratings (mID, uID, rating) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE rating = ?");
+    $query->bind_param('iidd', $mID, $wtf, $myrating, $myrating);
     $query->execute();
+    $query = $db->prepare("SELECT * FROM Ratings WHERE mID = ? and uID = ?");
+    $query->bind_param("ii", $mID, $wtf);
+    $query->execute();
+    $result = $query->get_result();
+    $myratings = $result->fetch_all(MYSQLI_ASSOC);
+  }
+
+  if(isset($_POST['watchlist'])) {
+    $db = get_mysqli_connection();
+    $query = $db->prepare("INSERT INTO List_Items (mID, lID) VALUES (?, ?) ON DUPLICATE KEY UPDATE mID = ?");
+    $query->bind_param('iii', $mID, $watchID, $mID);
+    $query->execute();
+  }
+
+  if(isset($_POST['removewatch'])) {
+    $db = get_mysqli_connection();
+    $query = $db->prepare("DELETE FROM List_Items where mID = ? and lID = ?");
+    $query->bind_param('ii', $mID, $watchID);
+    $query->execute();
+  }
+
+  if(isset($_POST['removeseen'])) {
+    $db = get_mysqli_connection();
+    $query = $db->prepare("DELETE FROM List_Items where mID = ? and lID = ?");
+    $query->bind_param('ii', $mID, $seenID);
+    $query->execute();
+  }
+
+  if(isset($_POST['seenlist'])) {
+    $db = get_mysqli_connection();
+    $query = $db->prepare("INSERT INTO List_Items (mID, lID) VALUES (?, ?) ON DUPLICATE KEY UPDATE mID = ?");
+    $query->bind_param('iii', $mID, $seenID, $mID);
+    $query->execute();
+  }
+
+  if(isset($_POST['critic'])) {
+    $critic = trim($_POST["review"], " ");
+    if (isset($_POST['nod'])){ 
+      $nod = $_POST["nod"];
+      $db = get_mysqli_connection();
+      $query = $db->prepare("INSERT INTO Reviews (u_ID, mID, critique, NOD) VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE critique = ?, NOD = ?");
+      $query->bind_param('iisisi', $wtf, $mID, $critic, $nod, $critic, $nod);
+      $query->execute();
+    }
   }
 }
 
@@ -190,6 +197,7 @@ $revision = <<<CONTENT
     <link rel="stylesheet" href="../styles/reel.css">
     <link rel="stylesheet" href="../styles/movie.css">
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
     <link rel="shortcut icon" href="../../imgs/favicon.ico" />
     <link rel="manifest" href="../mani/manifest.json" />
 </head>
@@ -433,6 +441,105 @@ $revision = <<<CONTENT
     <div class="film-cover-image-can"><img class="movie-cover-img" src="<?php echo $poster; ?>" /></div>
     <div class="mp-film-bd-info">
       <h1 class="mp-film-title"><?php echo $deets['title']; ?></h1>
+      <p class="mp-film-desc"><?php echo $deets['overview']; ?></p>
+      <div class="mp-opts-grouping">
+        <div class="rate-slider-can hideme" id="rate-range-can-mobile">
+            <label for="rateRange" class="form-label star-form-label">Scale: 0 - 10</label>
+            <div class="slider-deets">
+              <form method="post" action="" class="rate-form">
+                <output class="star-track">0</output>
+                <span class="material-symbols-outlined grade-star">
+                  grade
+                </span>
+              <input type="range" class="form-range" min="0" max="10" step="0.1" id="mp-rate-slider" name="rating" oninput="this.previousElementSibling.previousElementSibling.value = this.value">
+              <button type="submit" name="myrate" class="btn btn-success rate-check-btn">
+                <span class="material-symbols-outlined">
+                  check_small
+                </span>
+              </button>
+              </form>
+            </div>
+        </div>
+        <div class="mp-film-opts-can">
+              <div class="mp-film-opts rating">
+                <div class="mp-film-opts-hdr ">TMDB RATING</div>
+                <div class="mp-film-opts-item tmdb-rating"><?php echo number_format($deets['vote_average'], 1); ?>/10</div>
+              </div>
+              <div class="mp-film-opts rating">
+                <div class="mp-film-opts-hdr ">YOUR RATING</div>
+                <div class="mp-film-opts-item tmdb-rating">
+                <?php
+                if (isset($_SESSION["login_email"])){
+                  if (count($myratings) > 0) {
+                    echo "<div onclick='rateToggler()'>";
+                    echo number_format($myratings[0]['rating'], 1) . "/10"; 
+                    echo "</div>";
+                  }
+                  else {
+                    echo $mgiverating;
+                  }
+                }
+                     else {
+                      echo $mgiverating;
+                    }
+                  ?>
+                </div>
+              </div>
+              <div class="mp-film-opts">
+                <div class="mp-film-opts-hdr">REVIEW</div>
+                <div class="mp-film-opts-item">
+                  <?php
+                      if (isset($_SESSION["login_email"])){
+                        if (isReviewed($wtf, $mID)) {
+                          echo $reviewedit; 
+                        }else {
+                          echo $nocomment;
+                        }
+                      } else {
+                        echo $nocomment;
+                      }
+                    ?>
+                </div>
+              </div>
+              <div class="mp-film-opts">
+                <div class="mp-film-opts-hdr">SEENLIST</div>
+                <div class="mp-film-opts-item">
+                  <?php
+                    if (isset($_SESSION["login_email"])){
+                      if (onSeenlist($seenID, $mID)) {
+                        echo $seenit; 
+                      }else {
+                        echo $didnotseeit;
+                      }
+                    } else {
+                      echo $didnotseeit;
+                    }
+                  ?>
+                  
+                </div>
+              </div>
+              <div class="mp-film-opts">
+                <div class="mp-film-opts-hdr">WATCHLIST</div>
+                <div class="mp-film-opts-item">
+                  <?php
+                    if (isset($_SESSION["login_email"])){
+                      if (onWatchlist($watchID, $mID)) {
+                        echo $onthelist; 
+                      }else {
+                        echo $notonthelist;
+                      }
+                    } else {
+                      echo $notonthelist;
+                    }
+                  ?>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          </div>
+      </div>
     </div>
   </div>
 </div>
@@ -648,7 +755,7 @@ $revision = <<<CONTENT
                             You need to login or create an account.
                             <br>
                             <br>
-                            <button type="button" class="btn register-btn" data-bs-toggle="modal" data-bs-target="#signinModal">LOGIN</button>
+                            <button type="button" class="btn mp-register-btn" data-bs-toggle="modal" data-bs-target="#signinModal">LOGIN</button>
                             </div>
                           BODY;
 

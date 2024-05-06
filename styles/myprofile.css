@@ -1,5 +1,5 @@
 .ratelist-card {
-  width: 31%;
+  width: 80%;
   margin: 15px;
   display: flex;
   align-items: center;
@@ -17,7 +17,6 @@
   display: flex;
   height: 150px;
   width: 100%;
-  border-right: #222 1px solid;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
@@ -31,10 +30,10 @@
 
 .myratings-can {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   margin: 50px auto;
 }
-
 .tmdb-your-rate-can {
   display: flex;
   justify-content: space-around;

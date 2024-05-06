@@ -53,7 +53,7 @@
 .mp-film-title {
   padding: 2px;
   margin: 0 auto;
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   font-optical-sizing: auto;
   font-weight: 900;
   font-style: normal;
@@ -105,8 +105,13 @@
   font-size: 18pt;
 }
 
+.mp-ms-icon {
+  font-size: 24pt;
+  max-width: 95px;
+}
+
 .mp-section-hdr {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   font-optical-sizing: auto;
   font-weight: 600;
   font-size: 22pt;
@@ -156,6 +161,9 @@
 .mso-icon {
   font-size: 24pt;
   max-width: 95px;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 .mso-icon:hover {
@@ -259,4 +267,11 @@
 
 .form-bane {
   margin: 0;
+}
+
+.mp-register-btn {
+  height: 43px;
+  color: #222;
+  font-weight: 500;
+  background-color: goldenrod;
 }

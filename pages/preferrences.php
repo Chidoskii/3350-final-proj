@@ -11,6 +11,7 @@ if($_SESSION["logged_in"] == false){
 }
 
 $wtf = getUserId($_SESSION["login_email"]);
+$username = strtoupper($_SESSION["get_user"]["username"]);
 $ratelist = getRatedMovies($wtf);
 $seenlist = getSeenlistMovies($wtf);
 $reviewlist = getReviewedMovies($wtf);
@@ -40,6 +41,7 @@ $myrateColor = "rgb(240, 240, 240)";
     <link rel="stylesheet" href="../styles/navbar.css">
     <link rel="stylesheet" href="../styles/myprofile.css">
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
     <link rel="shortcut icon" href="../../imgs/favicon.ico" />
     <link rel="manifest" href="../mani/manifest.json" />
 </head>
@@ -278,11 +280,11 @@ $myrateColor = "rgb(240, 240, 240)";
                           <div class="rate-title-can">$title</div>
                           <div class="tmdb-your-rate-can">
                             <div class="your-rating-can">
-                              <div class="ratings-header">YOUR SCORE</div>
+                              <div class="ratings-header">$username</div>
                               <div class="ratings-score" style="background-color:$myrateColor;">$myrate</div>
                             </div>
                             <div class="your-rating-can">
-                              <div class="ratings-header">TMDB SCORE</div>
+                              <div class="ratings-header">TMDB</div>
                               <div class="ratings-score" style="background-color:$rateColor;">$rating</div>
                             </div>
                           </div>

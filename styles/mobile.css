@@ -1,0 +1,100 @@
+@media screen and (max-width: 750px) {
+  .backdrop-showcase {
+    display: none;
+  }
+
+  .backdrop-showcase-mobile {
+    display: flex;
+    min-height: 40vh;
+    width: 100%;
+    margin: 0 auto;
+    padding: 50px 0 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-bottom: #3a3a3a 1px solid;
+    box-shadow: 0 0 20px 8px #222;
+  }
+
+  .mp-film-bd-info {
+    color: aliceblue;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    margin: 0 auto;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .film-package {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+    width: 100%;
+  }
+
+  .mp-film-opts-can {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (min-width: 751px) {
+  .film-package {
+    padding: 125px 0 100px 60px;
+  }
+}
+
+@media screen and (max-width: 899px) {
+  .mp-film-opts-can {
+    padding: 0;
+    justify-content: space-around;
+  }
+
+  .sub-page-title,
+  .lp-section-hdr {
+    padding-left: 15px;
+  }
+}
+
+@media screen and (min-width: 1050px) {
+  .film-package {
+    padding-left: 100px;
+  }
+
+  .mp-film-opts-can {
+    padding: 0;
+    justify-content: space-around;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .mp-film-opts-can {
+    padding: 0;
+    justify-content: space-around;
+  }
+
+  .ratelist-card {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .ratelist-card,
+  .review-card,
+  .watchlist-card {
+    width: 47%;
+  }
+
+  .rate-img-cover {
+    max-height: 200px;
+  }
+}
+
+@media screen and (min-width: 1700px) {
+  .film-package {
+    padding-left: 200px;
+  }
+}
