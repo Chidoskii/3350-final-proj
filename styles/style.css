@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap');
 
 html,
 body {
@@ -13,7 +13,7 @@ body {
 
 .modal-title {
   font-size: 25pt;
-  font-family: "Orbitron", sans-serif;
+  font-family: 'Orbitron', sans-serif;
   font-optical-sizing: auto;
   font-weight: 900;
   font-style: normal;
@@ -88,7 +88,7 @@ body {
 }
 
 .home-page-show-header {
-  background-image: url("../imgs/ant.webp");
+  background-image: url('../imgs/ant.webp');
   background-repeat: repeat;
   background-position: -105% 10%;
   -webkit-text-fill-color: transparent;
@@ -96,7 +96,7 @@ body {
   font-size: 90pt;
   font-weight: bold;
   text-transform: uppercase;
-  font-family: "Steelfish Rg", "helvetica neue", helvetica, arial, sans-serif;
+  font-family: 'Steelfish Rg', 'helvetica neue', helvetica, arial, sans-serif;
   font-weight: 800;
   background-clip: text;
   -webkit-background-clip: text;
@@ -206,7 +206,7 @@ body {
 }
 
 .mp-section-hdr {
-  font-family: "Orbitron", sans-serif;
+  font-family: 'Orbitron', sans-serif;
   font-optical-sizing: auto;
   font-weight: 600;
   font-size: 22pt;
@@ -252,7 +252,7 @@ body {
 }
 
 .lp-section-hdr {
-  font-family: "Orbitron", sans-serif;
+  font-family: 'Orbitron', sans-serif;
   font-optical-sizing: auto;
   font-weight: 600;
   font-size: 22pt;
@@ -315,7 +315,7 @@ body {
 .cl-coming-soon {
   display: flex;
   margin: 100px;
-  font-family: "Orbitron", sans-serif;
+  font-family: 'Orbitron', sans-serif;
   font-optical-sizing: auto;
   min-height: 300px;
   font-size: 22pt;
@@ -325,6 +325,109 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+/******************************************** Best Movies *****************************************/
+
+.best-contents {
+  padding: 100px 0px;
+}
+
+.wrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.movie-card {
+  flex: 1;
+  flex-basis: 300px;
+  flex-grow: 0;
+  height: 440px;
+  margin: 25px 0;
+  background: black;
+  border: 1px solid whitesmoke;
+  border-radius: 5px;
+  box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.8, 0.5, 0.2, 1.4);
+  overflow: hidden;
+  position: relative;
+}
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  transition: all 0.5s cubic-bezier(0.8, 0.5, 0.2, 1.4);
+}
+.descriptions {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 100%;
+  height: 100%;
+  transition: all 0.7s ease-in-out;
+  padding: 20px;
+  box-sizing: border-box;
+  clip-path: circle(0% at 100% 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  overflow-y: scroll;
+}
+
+.ub-mp-film-title {
+  font-size: 30pt;
+  font-weight: 600;
+  padding: 18px 0;
+}
+
+.ub-mp-film-desc {
+  font-size: 15pt;
+  padding: 10px 0;
+}
+
+.movie-card:hover .descriptions {
+  left: 0px;
+  transition: all 0.7s ease-in-out;
+  clip-path: circle(75%);
+}
+.movie-card:hover {
+  transition: all 0.5s cubic-bezier(0.8, 0.5, 0.2, 1.4);
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+  transform: scale(0.97);
+}
+.movie-card:hover img {
+  transition: all 0.5s cubic-bezier(0.8, 0.5, 0.2, 1.4);
+  transform: scale(1.6) rotate(20deg);
+  filter: blur(3px);
+}
+.movie-card h1 {
+  color: #ff3838;
+  letter-spacing: 1px;
+  margin: 0px;
+}
+.movie-card p {
+  line-height: 24px;
+  height: 70%;
+}
+.movie-card button {
+  width: fit-content;
+  height: 40px;
+  cursor: pointer;
+  border-style: none;
+  background-color: #ff3838;
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
+  transition: all 0.5s ease-in-out;
+}
+.movie-card button:hover {
+  transform: scale(0.95) translateX(-5px);
+  transition: all 0.5s ease-in-out;
 }
 
 /******************************************** Footer styling **********************/
@@ -353,7 +456,7 @@ footer {
   text-align: center;
   padding-top: 25px;
   font-size: 25pt;
-  font-family: "Orbitron", sans-serif;
+  font-family: 'Orbitron', sans-serif;
   font-optical-sizing: auto;
   font-weight: 600;
   font-style: normal;
@@ -392,7 +495,7 @@ footer {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-family: "Montserrat Alternates", sans-serif;
+  font-family: 'Montserrat Alternates', sans-serif;
   padding-bottom: 5px;
 }
 
@@ -422,7 +525,7 @@ footer {
 .moviebuffs-copyright {
   font-size: 10pt;
   font-style: italic;
-  font-family: "Orbitron", sans-serif;
+  font-family: 'Orbitron', sans-serif;
   font-weight: 600;
   text-align: center;
   align-items: center;

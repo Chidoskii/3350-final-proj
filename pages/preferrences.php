@@ -62,12 +62,11 @@ $myrateColor = "rgb(240, 240, 240)";
             Movies
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Latest Releases</a></li>
-            <li><a class="dropdown-item" href="#">Best Movies All Time </a></li>
-            <li><a class="dropdown-item" href="#">Best Movies This Year  </a></li>
-            <li><a class="dropdown-item" href="#">Best Action Movies</a></li>
-            <li><a class="dropdown-item" href="#">Best Comedy Movies</a></li>
-            <li><a class="dropdown-item" href="#">Best Horror Movies</a></li>
+            <li><a class="dropdown-item" href="./best.php?mov=curr">Latest Releases</a></li>
+            <li><a class="dropdown-item" href="./best.php?mov=all">Best Movies All Time </a></li>
+            <li><a class="dropdown-item" href="./best.php?mov=act">Best Action Movies</a></li>
+            <li><a class="dropdown-item" href="./best.php?mov=com">Best Comedy Movies</a></li>
+            <li><a class="dropdown-item" href="./best.php?mov=horr">Best Horror Movies</a></li>
           </ul>
         </li>
       </ul>

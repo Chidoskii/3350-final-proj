@@ -4,24 +4,40 @@ require_once("../php/functions.php");
 require_once("../php/login.php");
 require_once("../php/register.php");
 
-if(empty($_SESSION["logged_in"])){
-  header("location: ../index.php");
-}
-
-if($_SESSION["logged_in"] == false){
-  header("location: ../index.php");
-}
-
-$wtf = getUserId($_SESSION["login_email"]);
-$watchlist = getWatchlistMovies($wtf);
-$seenlist = getSeenlistMovies($wtf);
-$deets = "";
-$filler = "../imgs/filler.jpg";
-$filler2 = "../imgs/mona.jpg";
+$films = "";
+$selection = "";
+$filler = "../imgs/mona.jpg";
+$youtube = "https://www.youtube.com/embed/";
 $config = configsTMDB();
 $poster_base = $config['images']['secure_base_url'] . $config['images']['poster_sizes'][4];
+$backdrop_base = $config['images']['secure_base_url'] . $config['images']['backdrop_sizes'][3];
+$backdrop_base_small = $config['images']['secure_base_url'] . $config['images']['backdrop_sizes'][1];
 $poster = "";
 $rateColor = "rgb(240, 240, 240)";
+
+
+if (isset($_GET["mov"])){
+  if($_GET["mov"] == "curr") {
+    $films = getCurrentMovies();
+    $selection = "Current";
+  }
+  if($_GET["mov"] == "all") {
+    $films = getGreatestMovies();
+    $selection = "Legendary";
+  }
+  if($_GET["mov"] == "act") {
+    $films = getMoviesByGenre($TMDB_API_KEY, 28);
+    $selection = "Action";
+  }
+  if($_GET["mov"] == "com") {
+    $films = getMoviesByGenre($TMDB_API_KEY, 35);
+    $selection = "Comedy";
+  }
+  if($_GET["mov"] == "horr") {
+    $films = getMoviesByGenre($TMDB_API_KEY, 27);
+    $selection = "Horror";
+  }
+}
 
 ?>
 
@@ -32,7 +48,7 @@ $rateColor = "rgb(240, 240, 240)";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="TheMovieBuffs is a website where users can write reviews and give ratings on films they have watched.">
-    <title><?= $PROJECT_NAME ?> | Lists</title>
+    <title><?= $PROJECT_NAME ?> | <?= $deets['title'] ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,400;0,600;0,700;1,600&display=swap" rel="stylesheet">
@@ -40,6 +56,7 @@ $rateColor = "rgb(240, 240, 240)";
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" />
     <link rel="stylesheet" href="../styles/navbar.css">
     <link rel="stylesheet" href="../styles/reel.css">
+    <link rel="stylesheet" href="../styles/movie.css">
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/mobile.css">
     <link rel="shortcut icon" href="../../imgs/favicon.ico" />
@@ -86,7 +103,7 @@ $rateColor = "rgb(240, 240, 240)";
                   </a>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="./preferrences.php">Profile</a></li>
-                    <li><a class="dropdown-item" href="#">Lists</a></li>
+                    <li><a class="dropdown-item" href="./lists.php">Lists</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item ddi-logout" href="../php/logout.php">LOGOUT </a></li>
                   </ul>
@@ -174,98 +191,53 @@ $rateColor = "rgb(240, 240, 240)";
 </div>
 
 <!-- Page Contents -->
-<div class="page-contents container lp-can">
-  <h1 class="lp-section-hdr">Watchlist</h1>
-    <div class="lp-watchlist-can">
-    <?php
-        foreach ($watchlist as $key => $item) {
-          $movieid = $item['mID'];
-            $deets = getMovieDeets($TMDB_API_KEY, $movieid);
+<div class="best-contents container">
+  <div class="now-playing">
+    <h1 class="movie-reel-title"><?= $selection ?> Movies</h1>
+    <div class="wrapper">
 
-            $id = $deets['id'];
-            $temp = $deets['original_title'];
-            $title = '"'. $temp . '"';
-            $img = $poster_base . $deets['poster_path'];
-            $rating = number_format($deets['vote_average'],1);
+      <?php
+        foreach ($films as $key => $movie) {
+          if ($key == "results") {
+            foreach ($movie as $key => $value) {
+              $id = $value['id'];
+              $temp = $value['original_title'];
+              $title = '"'. $temp . '"';
+              $release = $value['release_date'];
+              $img = $poster_base . $value['poster_path'];
+              $rating = $value['vote_average'];
+              $story = $value['overview'];
 
-            if ($rating > 7.4) {
-              $rateColor = "#93FFCD";
-            }
-            if ($rating < 7.5) {
-              $rateColor = "#FFE38E";
-            }
-            if ($rating < 5.6) {
-              $rateColor = "#FFBBB9";
-            }
-
-
-            $card = <<<CONTENT
-                    <div class="watchlist-card">
-                      <a class="watchlist-img-link" href="./movie.php?mid=$id" rel="noopener noreferrer">
-                        <img src="$img" alt="" class="wl-img-cover"/>
-                      </a>
-                      <div class="wl-film-info">
-                        <div class="wl-film-title">$title</div>
-                        <div class="wl-film-rate" style="background-color:$rateColor;">$rating</div>
-                      </div>
-                    </div>
-                    CONTENT;
+              if ($img == $poster_base) {
+                $img = $filler;
+              }
+              
+              $card = <<<CONTENT
+              <div class="movie-card">  
+                <img class="mp-film-image" src="$img" alt="img-1" />
+                <div class="descriptions">
+                  <a class="film-title-link" href="./movie.php?mid=$id" rel="noopener noreferrer">
+                    <h1 class="ub-mp-film-title">$title</h1>
+                  </a>
+                  <p class="ub-mp-film-desc">$story</p>
+                </div>
+              </div>
+              CONTENT;
             echo $card;
+            }
+          }
         }
       ?>
     </div>
-
-  <h1 class="lp-section-hdr">Seenlist</h1>
-  <div class="lp-watchlist-can">
-    <?php
-        foreach ($seenlist as $key => $item) {
-          $movieid = $item['mID'];
-            $deets = getMovieDeets($TMDB_API_KEY, $movieid);
-
-            $id = $deets['id'];
-            $temp = $deets['original_title'];
-            $title = '"'. $temp . '"';
-            $img = $poster_base . $deets['poster_path'];
-            $rating = number_format($deets['vote_average'],1);
-
-            if ($rating > 7.4) {
-              $rateColor = "#93FFCD";
-            }
-            if ($rating < 7.5) {
-              $rateColor = "#FFE38E";
-            }
-            if ($rating < 5.6) {
-              $rateColor = "#FFBBB9";
-            }
-
-
-            $card = <<<CONTENT
-                    <div class="watchlist-card">
-                      <a class="watchlist-img-link" href="./movie.php?mid=$id" rel="noopener noreferrer">
-                        <img src="$img" alt="" class="wl-img-cover"/>
-                      </a>
-                      <div class="wl-film-info">
-                        <div class="wl-film-title">$title</div>
-                        <div class="wl-film-rate" style="background-color:$rateColor;">$rating</div>
-                      </div>
-                    </div>
-                    CONTENT;
-            echo $card;
-        }
-      ?>
-    </div>
-
-
-  <h1 class="lp-section-hdr">Custom Lists</h1>
-  <p class="cl-coming-soon">Coming Soon!</p>
+  </div>
 
 </div>
-
 
 <?php
 require_once("./footer.php");
 ?>
 
+<script src="../scripts/mp-slide.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
